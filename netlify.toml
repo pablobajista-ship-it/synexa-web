@@ -6,3 +6,8 @@
   # Netlify compila better-sqlite3 (módulo nativo) durante el install, así que
   # conviene fijar una versión LTS con binarios precompilados disponibles.
   NODE_VERSION = "22"
+  # La caché de Turbopack (.next/cache) guarda los valores de las variables de
+  # entorno para acelerar recompilaciones. No se publica, pero el escáner de
+  # secretos de Netlify la revisa y falla el build por AUTH_SECRET. Solo se
+  # excluye esa carpeta; el resto del output se sigue escaneando.
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,.next/cache/**"
