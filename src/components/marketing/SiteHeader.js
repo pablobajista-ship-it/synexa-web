@@ -22,7 +22,7 @@ const NAV_LINKS = [
   { href: "#contacto", label: "Contacto" },
 ];
 
-export default function SiteHeader({ isAuthenticated, dashboardHref }) {
+export default function SiteHeader({ isAuthenticated, dashboardHref, portalEnabled = true }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -49,11 +49,11 @@ export default function SiteHeader({ isAuthenticated, dashboardHref }) {
             <Button href={dashboardHref} variant="secondary" size="md">
               Ir a mi panel
             </Button>
-          ) : (
+          ) : portalEnabled ? (
             <Button href="/login" variant="secondary" size="md">
               Ingresar
             </Button>
-          )}
+          ) : null}
           <Button href="#contacto" variant="primary" size="md">
             Hablemos
           </Button>
@@ -91,11 +91,11 @@ export default function SiteHeader({ isAuthenticated, dashboardHref }) {
                 <Button href={dashboardHref} variant="secondary">
                   Ir a mi panel
                 </Button>
-              ) : (
+              ) : portalEnabled ? (
                 <Button href="/login" variant="secondary">
                   Ingresar
                 </Button>
-              )}
+              ) : null}
               <Button href="#contacto" variant="primary">
                 Hablemos
               </Button>

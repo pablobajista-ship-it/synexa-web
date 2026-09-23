@@ -1,6 +1,7 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/marketing/Reveal";
+import { isPortalEnabled, isPortalHref } from "@/lib/portal";
 
 /**
  * CTA final oscuro. Se usa tanto en la Homepage como en páginas interiores:
@@ -15,6 +16,13 @@ export default function CtaSection({
   primaryAction = { href: "mailto:hola@synexa.com", label: "Hablemos" },
   secondaryAction = { href: "/login", label: "Portal de Clientes" },
 }) {
+  /* Si el portal está oculto no se renderizan los botones que llevan a él;
+     el CTA queda con una sola acción en vez de ofrecer un acceso roto. */
+  const hidePortal = !isPortalEnabled();
+  const primary = hidePortal && isPortalHref(primaryAction?.href) ? null : primaryAction;
+  const secondary =
+    hidePortal && isPortalHref(secondaryAction?.href) ? null : secondaryAction;
+
   return (
     <section
       id={id}
@@ -46,14 +54,14 @@ export default function CtaSection({
             {description}
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
-            {primaryAction ? (
-              <Button href={primaryAction.href} variant="accent" size="xl">
-                {primaryAction.label}
+            {primary ? (
+              <Button href={primary.href} variant="accent" size="xl">
+                {primary.label}
               </Button>
             ) : null}
-            {secondaryAction ? (
-              <Button href={secondaryAction.href} variant="on-dark-outline" size="xl">
-                {secondaryAction.label}
+            {secondary ? (
+              <Button href={secondary.href} variant="on-dark-outline" size="xl">
+                {secondary.label}
               </Button>
             ) : null}
           </div>

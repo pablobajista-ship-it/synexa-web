@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { isPortalEnabled } from "@/lib/portal";
 import SiteHeader from "@/components/marketing/SiteHeader";
 import Hero from "@/components/marketing/Hero";
 import ServicesGrid from "@/components/marketing/ServicesGrid";
@@ -17,7 +18,11 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <SiteHeader isAuthenticated={!!session?.user} dashboardHref={dashboardHref} />
+      <SiteHeader
+        isAuthenticated={!!session?.user}
+        dashboardHref={dashboardHref}
+        portalEnabled={isPortalEnabled()}
+      />
       <main>
         <Hero />
         <ServicesGrid />

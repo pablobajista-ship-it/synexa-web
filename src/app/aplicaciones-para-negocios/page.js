@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { isPortalEnabled } from "@/lib/portal";
 import SiteHeader from "@/components/marketing/SiteHeader";
 import SiteFooter from "@/components/marketing/SiteFooter";
 import PageHero from "@/components/marketing/PageHero";
@@ -45,7 +46,11 @@ export default async function AplicacionesParaNegociosPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <SiteHeader isAuthenticated={!!session?.user} dashboardHref={dashboardHref} />
+      <SiteHeader
+        isAuthenticated={!!session?.user}
+        dashboardHref={dashboardHref}
+        portalEnabled={isPortalEnabled()}
+      />
 
       <main>
         <PageHero

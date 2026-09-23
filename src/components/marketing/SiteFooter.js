@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import Container from "@/components/ui/Container";
+import { isPortalEnabled } from "@/lib/portal";
 
 const COLUMNS = [
   {
@@ -21,12 +22,22 @@ const COLUMNS = [
       { href: "/servicios-y-precios#soporte", label: "Planes de Soporte" },
       { href: "/#nosotros", label: "Nosotros" },
       { href: "#contacto", label: "Contacto" },
-      { href: "/login", label: "Portal de Clientes" },
+      { href: "/login", label: "Portal de Clientes", portal: true },
     ],
   },
 ];
 
 export default function SiteFooter() {
+  /* Cuando el portal está oculto (sitio público sin base de datos) se filtran
+     los enlaces que llevan a él, para no ofrecer un acceso que no funciona. */
+  const portalEnabled = isPortalEnabled();
+  const columns = portalEnabled
+    ? COLUMNS
+    : COLUMNS.map((column) => ({
+        ...column,
+        links: column.links.filter((link) => !link.portal),
+      }));
+
   return (
     <footer className="bg-[var(--color-navy)] border-t border-white/10">
       <Container className="py-16 lg:py-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.1fr] lg:gap-10">
@@ -38,7 +49,7 @@ export default function SiteFooter() {
           </p>
         </div>
 
-        {COLUMNS.map((column) => (
+        {columns.map((column) => (
           <div key={column.title}>
             <p className="text-white/45 text-[12px] font-bold uppercase tracking-[0.14em] mb-5">
               {column.title}
