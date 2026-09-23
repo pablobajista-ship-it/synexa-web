@@ -10,7 +10,10 @@ export default async function AdminConfigPage() {
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
   const rows = [
-    { label: "Administrador principal", value: "pablo.bajista@gmail.com" },
+    {
+      label: "Administrador principal",
+      value: process.env.ADMIN_EMAIL || "No configurado",
+    },
     { label: "Base de datos", value: process.env.DATABASE_PATH || "./data/ticketera.db" },
     { label: "Login con Google", value: isGoogleLoginConfigured ? "Configurado" : "No configurado" },
     { label: "Entorno", value: process.env.NODE_ENV },

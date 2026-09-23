@@ -96,7 +96,16 @@ function openDb() {
 }
 
 function seedAdmin(db) {
-  const adminEmail = "pablo.bajista@gmail.com";
+  // El correo del administrador se configura por entorno para no dejar datos
+  // personales en el código (este repositorio es público).
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  if (!adminEmail) {
+    console.warn(
+      "[ticketera] ADMIN_EMAIL no está definida en .env.local: el usuario administrador no se creó todavía."
+    );
+    return;
+  }
+
   const existing = db.prepare("SELECT id FROM users WHERE email = ?").get(adminEmail);
   if (existing) return;
 
@@ -111,7 +120,13 @@ function seedAdmin(db) {
   db.prepare(
     `INSERT INTO users (name, last_name, email, password_hash, role, provider)
      VALUES (?, ?, ?, ?, ?, 'credentials')`
-  ).run("Pablo", "Bajista", adminEmail, bcrypt.hashSync(adminPassword, 10), ROLES.ADMIN);
+  ).run(
+    process.env.ADMIN_NAME || "Administrador",
+    process.env.ADMIN_LAST_NAME || "",
+    adminEmail,
+    bcrypt.hashSync(adminPassword, 10),
+    ROLES.ADMIN
+  );
 
   console.log(`[ticketera] Usuario administrador creado: ${adminEmail}`);
 }

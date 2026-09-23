@@ -72,7 +72,11 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS counters (name TEXT PRIMARY KEY, value INTEGER NOT NULL);
 `);
 
-const adminEmail = "pablo.bajista@gmail.com";
+const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+if (!adminEmail) {
+  console.error("ADMIN_EMAIL no está definida en .env.local. Abortando seed.");
+  process.exit(1);
+}
 const adminPassword = process.env.ADMIN_PASSWORD;
 if (!adminPassword || adminPassword === "CAMBIAR_PASSWORD") {
   console.error("ADMIN_PASSWORD no está definida en .env.local. Abortando seed.");
@@ -81,7 +85,13 @@ if (!adminPassword || adminPassword === "CAMBIAR_PASSWORD") {
 if (!db.prepare("SELECT id FROM users WHERE email = ?").get(adminEmail)) {
   db.prepare(
     "INSERT INTO users (name, last_name, email, password_hash, role, provider) VALUES (?,?,?,?,?,'credentials')"
-  ).run("Pablo", "Bajista", adminEmail, bcrypt.hashSync(adminPassword, 10), "ADMIN");
+  ).run(
+    process.env.ADMIN_NAME || "Administrador",
+    process.env.ADMIN_LAST_NAME || "",
+    adminEmail,
+    bcrypt.hashSync(adminPassword, 10),
+    "ADMIN"
+  );
   console.log(`Administrador creado: ${adminEmail}`);
 } else {
   console.log(`Administrador ya existía: ${adminEmail}`);

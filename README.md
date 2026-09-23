@@ -60,7 +60,8 @@ Copiá `.env.example` a `.env.local` y completá:
 | `AUTH_SECRET` | Clave para firmar sesiones de Auth.js. Generar con `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. |
 | `AUTH_URL` | URL base de la app (`http://localhost:3000` en desarrollo). |
 | `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | Credenciales OAuth de Google (opcional). Si están vacías, el botón "Continuar con Google" queda deshabilitado y el resto de la app funciona normalmente. |
-| `ADMIN_PASSWORD` | Contraseña del administrador principal (`pablo.bajista@gmail.com`). Se usa **solo** para crear la cuenta la primera vez. Nunca se escribe en el código ni en git. |
+| `ADMIN_EMAIL` | Correo del administrador principal. Sin esta variable no se crea ninguna cuenta de administrador. |
+| `ADMIN_PASSWORD` | Contraseña de esa cuenta. Se usa **solo** para crearla la primera vez. Nunca se escribe en el código ni en git. |
 | `SEED_CLIENT_PASSWORD` | Opcional, solo para `npm run seed` (clientes de prueba). |
 
 `.env.local` está en `.gitignore` y nunca se sube al repositorio.
@@ -93,10 +94,10 @@ routes, componentes) no conoce el detalle de SQLite.
 1. Completá `ADMIN_PASSWORD` en `.env.local` con tu contraseña real.
 2. `npm run dev`.
 3. Si el usuario admin **no existe todavía** en `data/ticketera.db`, se crea solo al
-   arrancar, con el email `pablo.bajista@gmail.com` y esa contraseña.
+   arrancar, con el email de `ADMIN_EMAIL` y esa contraseña.
 4. Si ya existe pero sin contraseña (por ejemplo, en este entorno recién armado), entrá a
    `http://localhost:3000/forgot-password`, pedí la recuperación con
-   `pablo.bajista@gmail.com` y seguí el enlace (en desarrollo, sin SMTP configurado, el
+   el correo de `ADMIN_EMAIL` y seguí el enlace (en desarrollo, sin SMTP configurado, el
    enlace se muestra en la propia pantalla y queda registrado en la consola del
    servidor).
 
