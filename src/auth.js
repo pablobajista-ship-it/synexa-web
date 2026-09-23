@@ -29,7 +29,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const password = credentials?.password?.toString();
         if (!email || !password) return null;
 
-        const user = findUserByEmail(email);
+        const user = await findUserByEmail(email);
         if (!user || !user.password_hash) return null;
 
         const valid = bcrypt.compareSync(password, user.password_hash);
@@ -59,17 +59,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (account?.provider !== "google") return true;
 
       const googleId = account.providerAccountId;
-      let dbUser = findUserByGoogleId(googleId);
+      let dbUser = await findUserByGoogleId(googleId);
 
       if (!dbUser && user.email) {
-        dbUser = findUserByEmail(user.email);
+        dbUser = await findUserByEmail(user.email);
         if (dbUser) {
-          linkGoogleAccount(dbUser.id, { googleId, image: user.image });
+          await linkGoogleAccount(dbUser.id, { googleId, image: user.image });
         }
       }
 
       if (!dbUser) {
-        dbUser = createUserFromGoogle({
+        dbUser = await createUserFromGoogle({
           name: user.name ?? user.email,
           email: user.email,
           googleId,

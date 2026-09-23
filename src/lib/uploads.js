@@ -1,11 +1,11 @@
-import path from "node:path";
-import fs from "node:fs/promises";
 import crypto from "node:crypto";
+import { createClient } from "@supabase/supabase-js";
 
-// Ruta fija (no vía env var) para que el bundler pueda acotar el tracing de
-// archivos al desplegar; ver src/lib/uploads.js en el README si hace falta
-// moverla a almacenamiento en la nube más adelante.
-const UPLOADS_ROOT = "uploads";
+// Los adjuntos se guardan en Supabase Storage, en un bucket privado (creado en
+// supabase/migrations/0001_init.sql). El cliente usa la service role key, que
+// salta las políticas de Storage: nunca debe llegar al navegador. Los archivos
+// solo se sirven a través de /api/attachments/[id], que valida el acceso.
+const BUCKET = process.env.SUPABASE_STORAGE_BUCKET || "attachments";
 const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8 MB
 
 const ALLOWED_TYPES = {
@@ -17,7 +17,24 @@ const ALLOWED_TYPES = {
 
 export class UploadError extends Error {}
 
-export async function saveUploadedFile(file, ticketNumber) {
+function storage() {
+  const globalForStorage = globalThis;
+  if (!globalForStorage.__ticketeraStorage) {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) {
+      throw new Error("[ticketera] Faltan SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY.");
+    }
+    globalForStorage.__ticketeraStorage = createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    }).storage.from(BUCKET);
+  }
+  return globalForStorage.__ticketeraStorage;
+}
+
+// Valida los archivos antes de crear nada en la base, para no dejar tickets o
+// mensajes a medias cuando un adjunto no es válido.
+export function validateUploadedFile(file) {
   if (!(file instanceof File)) {
     throw new UploadError("Archivo inválido.");
   }
@@ -27,33 +44,40 @@ export async function saveUploadedFile(file, ticketNumber) {
   if (file.size > MAX_FILE_SIZE) {
     throw new UploadError(`El archivo "${file.name}" supera el tamaño máximo permitido (8MB).`);
   }
-
-  const extension = ALLOWED_TYPES[file.type];
-  if (!extension) {
+  if (!ALLOWED_TYPES[file.type]) {
     throw new UploadError(
       `Tipo de archivo no permitido: "${file.name}". Solo se aceptan PNG, JPG, PDF y TXT.`
     );
   }
+}
 
-  const dir = path.join(process.cwd(), UPLOADS_ROOT, ticketNumber);
-  await fs.mkdir(dir, { recursive: true });
+export async function saveUploadedFile(file, ticketNumber) {
+  validateUploadedFile(file);
 
-  const storedName = `${crypto.randomUUID()}${extension}`;
-  const absolutePath = path.join(dir, storedName);
-  const relativePath = path.join(UPLOADS_ROOT, ticketNumber, storedName);
+  const storedName = `${crypto.randomUUID()}${ALLOWED_TYPES[file.type]}`;
+  const objectPath = `${ticketNumber}/${storedName}`;
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(absolutePath, buffer);
+  const { error } = await storage().upload(objectPath, await file.arrayBuffer(), {
+    contentType: file.type,
+    upsert: false,
+  });
+  if (error) {
+    throw new Error(`[ticketera] No se pudo subir el adjunto a Storage: ${error.message}`);
+  }
 
   return {
     originalName: file.name.slice(0, 200),
     storedName,
     mimeType: file.type,
     size: file.size,
-    filePath: relativePath,
+    filePath: objectPath,
   };
 }
 
-export function resolveUploadPath(relativePath) {
-  return path.resolve(process.cwd(), relativePath);
+export async function readUploadedFile(objectPath) {
+  const { data, error } = await storage().download(objectPath);
+  if (error) {
+    throw new Error(`[ticketera] No se pudo leer el adjunto de Storage: ${error.message}`);
+  }
+  return Buffer.from(await data.arrayBuffer());
 }

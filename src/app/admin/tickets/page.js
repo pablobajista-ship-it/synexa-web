@@ -11,7 +11,7 @@ export default async function AdminTicketsPage() {
   if (!session?.user) redirect("/");
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
-  const tickets = listAllTickets();
+  const tickets = await listAllTickets();
 
   return (
     <div className="min-h-screen bg-slate-50">

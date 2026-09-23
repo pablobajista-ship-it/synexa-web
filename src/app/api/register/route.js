@@ -31,14 +31,14 @@ export async function POST(request) {
     return NextResponse.json({ errors }, { status: 400 });
   }
 
-  if (findUserByEmail(email)) {
+  if (await findUserByEmail(email)) {
     return NextResponse.json(
       { errors: { email: "Ya existe una cuenta con ese email." } },
       { status: 409 }
     );
   }
 
-  const user = createUser({
+  const user = await createUser({
     name,
     lastName,
     email,

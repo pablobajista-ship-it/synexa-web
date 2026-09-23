@@ -13,7 +13,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Ingresá tu email." }, { status: 400 });
   }
 
-  const user = findUserByEmail(trimmedEmail);
+  const user = await findUserByEmail(trimmedEmail);
 
   // Por seguridad, la respuesta es la misma exista o no la cuenta.
   let devResetLink = null;
@@ -21,14 +21,17 @@ export async function POST(request) {
   if (user) {
     const token = crypto.randomBytes(32).toString("hex");
     const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString();
-    setResetToken(user.id, token, expiresAt);
+    await setResetToken(user.id, token, expiresAt);
 
-    const baseUrl = process.env.AUTH_URL || request.nextUrl.origin;
-    devResetLink = `${baseUrl}/reset-password?token=${token}`;
-
-    // No hay SMTP configurado todavía: dejamos el enlace en el log del server
-    // y se lo devolvemos al cliente para poder probar el flujo en local.
-    console.log(`[ticketera] Enlace de recuperación para ${user.email}: ${devResetLink}`);
+    // No hay SMTP configurado todavía. Solo en desarrollo se muestra el enlace
+    // (en pantalla y en el log) para poder probar el flujo. En producción
+    // devolverlo permitiría a cualquiera resetear la contraseña de otra cuenta,
+    // incluida la del administrador, y el log guardaría tokens válidos.
+    if (process.env.NODE_ENV !== "production") {
+      const baseUrl = process.env.AUTH_URL || request.nextUrl.origin;
+      devResetLink = `${baseUrl}/reset-password?token=${token}`;
+      console.log(`[ticketera] Enlace de recuperación para ${user.email}: ${devResetLink}`);
+    }
   }
 
   return NextResponse.json({ ok: true, devResetLink });

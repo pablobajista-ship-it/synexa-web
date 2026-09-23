@@ -10,7 +10,7 @@ export default async function AccountPage() {
   const session = await auth();
   if (!session?.user) redirect("/");
 
-  const user = findUserById(Number(session.user.id));
+  const user = await findUserById(Number(session.user.id));
 
   const rows = [
     { label: "Nombre", value: `${user.name} ${user.last_name || ""}`.trim() },

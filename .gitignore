@@ -50,3 +50,6 @@ next-env.d.ts
 # uploaded ticket attachments (local dev storage)
 /uploads/
 dev.log
+
+# notas locales con credenciales (no subir)
+Supabase.txt

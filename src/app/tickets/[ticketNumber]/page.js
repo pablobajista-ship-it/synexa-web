@@ -24,16 +24,18 @@ export default async function TicketDetailPage({ params }) {
   if (!session?.user) redirect("/");
 
   const { ticketNumber } = await params;
-  const ticket = findTicketByNumber(ticketNumber);
+  const ticket = await findTicketByNumber(ticketNumber);
 
   if (!ticket || !canAccessTicket(session, ticket)) {
     notFound();
   }
 
   const isAdmin = session.user.role === "ADMIN";
-  const client = findUserById(ticket.user_id);
-  const messages = listTicketMessages(ticket.id, { includeInternal: isAdmin });
-  const attachments = listTicketAttachments(ticket.id);
+  const [client, messages, attachments] = await Promise.all([
+    findUserById(ticket.user_id),
+    listTicketMessages(ticket.id, { includeInternal: isAdmin }),
+    listTicketAttachments(ticket.id),
+  ]);
 
   const attachmentsByMessage = {};
   const ticketLevelAttachments = [];

@@ -9,7 +9,7 @@ import {
   TICKET_STATUS,
 } from "@/lib/db";
 import { canAccessTicket } from "@/lib/ticketAccess";
-import { saveUploadedFile, UploadError } from "@/lib/uploads";
+import { saveUploadedFile, validateUploadedFile, UploadError } from "@/lib/uploads";
 import { notifyNewReplyToClient, notifyNewReplyToAdmin } from "@/services/notifications";
 import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
@@ -24,7 +24,7 @@ export async function POST(request, { params }) {
   }
 
   const { ticketNumber } = await params;
-  const ticket = findTicketByNumber(ticketNumber);
+  const ticket = await findTicketByNumber(ticketNumber);
   if (!ticket || !canAccessTicket(session, ticket)) {
     return NextResponse.json({ error: "Ticket no encontrado." }, { status: 404 });
   }
@@ -45,21 +45,8 @@ export async function POST(request, { params }) {
     );
   }
 
-  const created = addTicketMessage(ticket.id, Number(session.user.id), message, isInternal);
-
   try {
-    for (const file of files) {
-      const saved = await saveUploadedFile(file, ticket.ticket_number);
-      addAttachment({
-        ticketId: ticket.id,
-        messageId: created.id,
-        originalName: saved.originalName,
-        storedName: saved.storedName,
-        mimeType: saved.mimeType,
-        size: saved.size,
-        filePath: saved.filePath,
-      });
-    }
+    files.forEach(validateUploadedFile);
   } catch (err) {
     if (err instanceof UploadError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
@@ -67,12 +54,27 @@ export async function POST(request, { params }) {
     throw err;
   }
 
-  // Si el cliente responde a un ticket que estaba esperando su respuesta, lo reactivamos.
-  if (session.user.role !== "ADMIN" && ticket.status === TICKET_STATUS.ESPERANDO_CLIENTE) {
-    updateTicketFields(ticket.id, { status: TICKET_STATUS.EN_PROCESO });
+  const created = await addTicketMessage(ticket.id, Number(session.user.id), message, isInternal);
+
+  for (const file of files) {
+    const saved = await saveUploadedFile(file, ticket.ticket_number);
+    await addAttachment({
+      ticketId: ticket.id,
+      messageId: created.id,
+      originalName: saved.originalName,
+      storedName: saved.storedName,
+      mimeType: saved.mimeType,
+      size: saved.size,
+      filePath: saved.filePath,
+    });
   }
 
-  const client = findUserById(ticket.user_id);
+  // Si el cliente responde a un ticket que estaba esperando su respuesta, lo reactivamos.
+  if (session.user.role !== "ADMIN" && ticket.status === TICKET_STATUS.ESPERANDO_CLIENTE) {
+    await updateTicketFields(ticket.id, { status: TICKET_STATUS.EN_PROCESO });
+  }
+
+  const client = await findUserById(ticket.user_id);
   if (session.user.role === "ADMIN") {
     notifyNewReplyToClient(ticket, client);
   } else {

@@ -1,10 +1,10 @@
 /**
  * Interruptor del Portal de Clientes.
  *
- * El portal (login, registro, tickets, panel) necesita base de datos y disco
- * para los adjuntos. En un despliegue serverless —como el sitio público en
- * Netlify— eso no está disponible, así que conviene ocultarlo en vez de dejar
- * un formulario que falla al enviarse.
+ * El portal (login, registro, tickets, panel) necesita Supabase configurado
+ * (DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY). En un despliegue
+ * sin esas variables conviene ocultarlo en vez de dejar un formulario que
+ * falla al enviarse.
  *
  * Por defecto está HABILITADO: en local y en cualquier host con base de datos
  * el portal funciona sin configurar nada. Para ocultarlo en el sitio público

@@ -11,7 +11,7 @@ export default async function AdminClientsPage() {
   if (!session?.user) redirect("/");
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
-  const clients = listClients();
+  const clients = await listClients();
 
   return (
     <div className="min-h-screen bg-slate-50">

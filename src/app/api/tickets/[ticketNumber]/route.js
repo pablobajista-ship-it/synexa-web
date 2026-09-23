@@ -13,7 +13,7 @@ export async function PATCH(request, { params }) {
   }
 
   const { ticketNumber } = await params;
-  const ticket = findTicketByNumber(ticketNumber);
+  const ticket = await findTicketByNumber(ticketNumber);
   if (!ticket || !canAccessTicket(session, ticket)) {
     return NextResponse.json({ error: "Ticket no encontrado." }, { status: 404 });
   }
@@ -40,6 +40,6 @@ export async function PATCH(request, { params }) {
     fields.category = body.category;
   }
 
-  const updated = updateTicketFields(ticket.id, fields);
+  const updated = await updateTicketFields(ticket.id, fields);
   return NextResponse.json({ ticket: updated });
 }

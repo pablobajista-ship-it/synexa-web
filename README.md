@@ -3,7 +3,7 @@
 Sitio principal + ticketera (Centro de Atención y Soporte) de SYNEXA: aplicación web
 independiente para presentar la marca, gestionar tickets de soporte, solicitudes
 comerciales y comunicación con clientes. Construida con Next.js (App Router,
-JavaScript), Auth.js y SQLite local.
+JavaScript), Auth.js y Postgres en Supabase (base de datos + Storage para adjuntos).
 
 Este proyecto es **completamente independiente** del sitio de iluminación (WordPress) y
 vive en su propio repositorio, en `C:\ticketera-servicios-web`.
@@ -56,7 +56,11 @@ Copiá `.env.example` a `.env.local` y completá:
 
 | Variable | Descripción |
 | --- | --- |
-| `DATABASE_PATH` | Ruta del archivo SQLite local (por defecto `./data/ticketera.db`). |
+| `DATABASE_URL` | Connection string de Supabase, **Transaction pooler** (puerto 6543): *Project Settings → Database → Connection string*. |
+| `SUPABASE_URL` | *Project URL* de Supabase (*Project Settings → API*). |
+| `SUPABASE_SERVICE_ROLE_KEY` | Clave `service_role` de Supabase. Secreta: solo se usa en el servidor para subir/descargar adjuntos. |
+| `SUPABASE_STORAGE_BUCKET` | Opcional, bucket de adjuntos (por defecto `attachments`). |
+| `PORTAL_ENABLED` | `false` oculta el portal de clientes (enlaces y login). Por defecto habilitado. |
 | `AUTH_SECRET` | Clave para firmar sesiones de Auth.js. Generar con `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. |
 | `AUTH_URL` | URL base de la app (`http://localhost:3000` en desarrollo). |
 | `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` | Credenciales OAuth de Google (opcional). Si están vacías, el botón "Continuar con Google" queda deshabilitado y el resto de la app funciona normalmente. |
@@ -68,33 +72,30 @@ Copiá `.env.example` a `.env.local` y completá:
 
 ## Base de datos
 
-Es un archivo SQLite (`better-sqlite3`), sin servidor de base de datos aparte. Se crea
-solo, con todas las tablas, la primera vez que arranca la app — no hace falta correr
-migraciones a mano.
+Postgres en Supabase, accedido con la librería [`postgres`](https://github.com/porsager/postgres)
+desde `src/lib/db.js` (el único archivo que conoce SQL; páginas y API routes solo llaman
+a sus funciones, todas asíncronas).
 
-- **Inicializar / resetear la base de desarrollo**: borrá `data/ticketera.db*` y volvé a
-  arrancar `npm run dev` (o corré `npm run seed`). Es un archivo local, no afecta a nadie
-  más.
+- **Esquema**: vive en `supabase/migrations/*.sql`. Aplicarlo con `npm run db:migrate`
+  (idempotente: registra lo aplicado en `schema_migrations`). También se puede pegar el
+  SQL en el *SQL Editor* de Supabase.
+- **Seguridad**: todas las tablas tienen RLS activado **sin políticas**, así la API REST
+  pública de Supabase (anon key) no puede leerlas. La app se conecta directo a Postgres
+  como dueña de las tablas, por eso no le afecta. Si agregás tablas, activales RLS.
 - **Datos de prueba**: `npm run seed` crea al administrador (si `ADMIN_PASSWORD` está
-  definida), dos clientes ficticios y tres tickets de ejemplo. Es idempotente: no duplica
-  datos si ya existen.
-- **Adjuntos**: se guardan en `uploads/<número de ticket>/` (fuera de `src/`, ignorado por
-  git). Solo se sirven a través de `/api/attachments/[id]`, que valida que quien pide el
-  archivo sea el dueño del ticket o un administrador.
-
-### Migración futura a Postgres/Supabase
-
-Toda la lógica de acceso a datos está aislada en `src/lib/db.js` (funciones puras que
-reciben/devuelven objetos JS). El día que se despliegue en internet, ese archivo es el
-único que hay que reescribir contra el nuevo motor — el resto de la app (páginas, API
-routes, componentes) no conoce el detalle de SQLite.
+  definida), dos clientes ficticios y tres tickets de ejemplo. Es idempotente.
+- **Numeración de tickets**: la tabla `counters` se incrementa con un upsert atómico
+  dentro de la misma transacción que crea el ticket (`SW-000001`, `SW-000002`, ...).
+- **Adjuntos**: se guardan en Supabase Storage, bucket privado `attachments`, bajo
+  `<número de ticket>/<uuid>.<ext>`. Solo se sirven a través de `/api/attachments/[id]`,
+  que valida que quien pide el archivo sea el dueño del ticket o un administrador.
 
 ## Cómo entrar como administrador
 
 1. Completá `ADMIN_PASSWORD` en `.env.local` con tu contraseña real.
 2. `npm run dev`.
-3. Si el usuario admin **no existe todavía** en `data/ticketera.db`, se crea solo al
-   arrancar, con el email de `ADMIN_EMAIL` y esa contraseña.
+3. Si el usuario admin **no existe todavía** en la base, se crea solo con la primera
+   consulta, con el email de `ADMIN_EMAIL` y esa contraseña.
 4. Si ya existe pero sin contraseña (por ejemplo, en este entorno recién armado), entrá a
    `http://localhost:3000/forgot-password`, pedí la recuperación con
    el correo de `ADMIN_EMAIL` y seguí el enlace (en desarrollo, sin SMTP configurado, el
@@ -133,8 +134,8 @@ src/
   auth.js / auth.config.js  configuración de Auth.js (Credentials + Google)
   proxy.js                 protección de rutas por rol (antes "middleware")
 scripts/seed.js            datos de desarrollo
-uploads/                   adjuntos subidos (gitignored)
-data/                      base SQLite (gitignored)
+scripts/migrate.js         aplica supabase/migrations/*.sql
+supabase/migrations/       esquema de la base (SQL)
 ```
 
 La web principal (`/`) es pública. El login, el registro y todo lo relacionado a
@@ -175,10 +176,6 @@ tickets vive bajo `/login`, `/dashboard`, `/tickets` y `/admin`.
 - Roles `AGENT`/`TECHNICIAN` (el campo `role` ya soporta agregarlos).
 - Ficha de cliente ampliada (proyectos, servicios contratados, dominios, hosting).
 - Estadísticas más avanzadas (tiempos de respuesta/resolución).
-- Migración de SQLite a Postgres/Supabase y despliegue con dominio propio.
-- Antes de desplegar en Vercel: mover `uploads/` a un storage en la nube (S3/R2/etc.).
-  `npm run build` avisa que `src/lib/uploads.js` referencia rutas dinámicas de archivos;
-  funciona bien en un servidor propio, pero en serverless conviene no depender del
-  filesystem local para los adjuntos.
+- Dominio propio para el sitio publicado en Netlify.
 - Reemplazar el logo hecho en SVG (`src/components/Logo.js`) por el archivo definitivo
   cuando exista, y el favicon (`src/app/icon.js`) en consecuencia.

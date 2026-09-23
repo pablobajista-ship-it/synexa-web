@@ -13,8 +13,7 @@ export default async function DashboardPage() {
   if (session.user.role === "ADMIN") redirect("/admin");
 
   const userId = Number(session.user.id);
-  const tickets = listTicketsForUser(userId);
-  const stats = ticketStats(userId);
+  const [tickets, stats] = await Promise.all([listTicketsForUser(userId), ticketStats(userId)]);
 
   const openCount = stats.NUEVO + stats.RECIBIDO + stats.EN_REVISION + stats.EN_PROCESO;
   const waitingCount = stats.ESPERANDO_CLIENTE;

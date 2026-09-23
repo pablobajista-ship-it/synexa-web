@@ -12,9 +12,11 @@ export default async function AdminDashboardPage() {
   if (!session?.user) redirect("/");
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
-  const stats = ticketStats();
-  const tickets = listAllTickets();
-  const clients = listClients();
+  const [stats, tickets, clients] = await Promise.all([
+    ticketStats(),
+    listAllTickets(),
+    listClients(),
+  ]);
 
   const cards = [
     { label: "Nuevos", value: stats.NUEVO },

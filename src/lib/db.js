@@ -1,7 +1,5 @@
-import Database from "better-sqlite3";
+import postgres from "postgres";
 import bcrypt from "bcryptjs";
-import path from "node:path";
-import fs from "node:fs";
 import {
   ROLES,
   TICKET_STATUS,
@@ -9,314 +7,271 @@ import {
   PREFERRED_CONTACT,
 } from "@/lib/db-constants";
 
-const DB_PATH = process.env.DATABASE_PATH || "./data/ticketera.db";
-
 export * from "@/lib/db-constants";
 
-function openDb() {
-  const resolved = path.resolve(process.cwd(), DB_PATH);
-  fs.mkdirSync(path.dirname(resolved), { recursive: true });
-
-  const db = new Database(resolved);
-  db.pragma("journal_mode = WAL");
-  db.pragma("foreign_keys = ON");
-
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      last_name TEXT NOT NULL DEFAULT '',
-      email TEXT NOT NULL UNIQUE,
-      phone TEXT,
-      company TEXT,
-      password_hash TEXT,
-      role TEXT NOT NULL DEFAULT 'CLIENT',
-      image TEXT,
-      provider TEXT NOT NULL DEFAULT 'credentials',
-      google_id TEXT UNIQUE,
-      reset_token TEXT UNIQUE,
-      reset_token_expires_at TEXT,
-      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS tickets (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      ticket_number TEXT NOT NULL UNIQUE,
-      user_id INTEGER NOT NULL REFERENCES users(id),
-      subject TEXT NOT NULL,
-      description TEXT NOT NULL,
-      category TEXT NOT NULL,
-      service TEXT,
-      url TEXT,
-      priority TEXT NOT NULL DEFAULT 'NORMAL',
-      status TEXT NOT NULL DEFAULT 'NUEVO',
-      preferred_contact TEXT NOT NULL DEFAULT 'A través de este ticket',
-      device TEXT,
-      operating_system TEXT,
-      browser TEXT,
-      error_message TEXT,
-      steps_before_error TEXT,
-      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      closed_at TEXT
-    );
-
-    CREATE TABLE IF NOT EXISTS ticket_messages (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      ticket_id INTEGER NOT NULL REFERENCES tickets(id),
-      user_id INTEGER NOT NULL REFERENCES users(id),
-      message TEXT NOT NULL,
-      is_internal INTEGER NOT NULL DEFAULT 0,
-      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS attachments (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      ticket_id INTEGER NOT NULL REFERENCES tickets(id),
-      message_id INTEGER REFERENCES ticket_messages(id),
-      original_name TEXT NOT NULL,
-      stored_name TEXT NOT NULL,
-      mime_type TEXT NOT NULL,
-      size INTEGER NOT NULL,
-      path TEXT NOT NULL,
-      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );
-
-    CREATE TABLE IF NOT EXISTS counters (
-      name TEXT PRIMARY KEY,
-      value INTEGER NOT NULL
-    );
-  `);
-
-  seedAdmin(db);
-
-  return db;
+// Conexión a Postgres (Supabase). DATABASE_URL debe apuntar al pooler en modo
+// transacción (puerto 6543): cada función serverless abre pocas conexiones y el
+// pooler las reparte. Ese modo no admite prepared statements, de ahí
+// `prepare: false`. El esquema vive en supabase/migrations/ (npm run db:migrate).
+function openSql() {
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    throw new Error("[ticketera] DATABASE_URL no está definida.");
+  }
+  return postgres(url, { prepare: false, max: 3, idle_timeout: 20 });
 }
 
-function seedAdmin(db) {
+// En desarrollo, el hot reload vuelve a evaluar este módulo: se guarda la
+// conexión en globalThis para no abrir un pool nuevo en cada recarga.
+const globalForDb = globalThis;
+
+export function getSql() {
+  if (!globalForDb.__ticketeraSql) {
+    globalForDb.__ticketeraSql = openSql();
+  }
+  return globalForDb.__ticketeraSql;
+}
+
+// Las páginas y formatDate() esperan fechas como texto ISO (así las devolvía
+// SQLite); postgres las entrega como Date.
+function plain(row) {
+  if (!row) return undefined;
+  const out = {};
+  for (const [key, value] of Object.entries(row)) {
+    out[key] = value instanceof Date ? value.toISOString() : value;
+  }
+  return out;
+}
+
+const plainAll = (rows) => rows.map(plain);
+
+async function ensureAdmin(sql) {
   // El correo del administrador se configura por entorno para no dejar datos
   // personales en el código (este repositorio es público).
   const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   if (!adminEmail) {
     console.warn(
-      "[ticketera] ADMIN_EMAIL no está definida en .env.local: el usuario administrador no se creó todavía."
+      "[ticketera] ADMIN_EMAIL no está definida: el usuario administrador no se creó todavía."
     );
     return;
   }
 
-  const existing = db.prepare("SELECT id FROM users WHERE email = ?").get(adminEmail);
+  const [existing] = await sql`SELECT id FROM users WHERE email = ${adminEmail}`;
   if (existing) return;
 
   const adminPassword = process.env.ADMIN_PASSWORD;
   if (!adminPassword || adminPassword === "CAMBIAR_PASSWORD") {
     console.warn(
-      "[ticketera] ADMIN_PASSWORD no está definida en .env.local: el usuario administrador no se creó todavía."
+      "[ticketera] ADMIN_PASSWORD no está definida: el usuario administrador no se creó todavía."
     );
     return;
   }
 
-  db.prepare(
-    `INSERT INTO users (name, last_name, email, password_hash, role, provider)
-     VALUES (?, ?, ?, ?, ?, 'credentials')`
-  ).run(
-    process.env.ADMIN_NAME || "Administrador",
-    process.env.ADMIN_LAST_NAME || "",
-    adminEmail,
-    bcrypt.hashSync(adminPassword, 10),
-    ROLES.ADMIN
-  );
+  await sql`
+    INSERT INTO users (name, last_name, email, password_hash, role, provider)
+    VALUES (
+      ${process.env.ADMIN_NAME || "Administrador"},
+      ${process.env.ADMIN_LAST_NAME || ""},
+      ${adminEmail},
+      ${bcrypt.hashSync(adminPassword, 10)},
+      ${ROLES.ADMIN},
+      'credentials'
+    )
+    ON CONFLICT (email) DO NOTHING
+  `;
 
   console.log(`[ticketera] Usuario administrador creado: ${adminEmail}`);
 }
 
-let dbInstance;
-
-export function getDb() {
-  if (!dbInstance) {
-    dbInstance = openDb();
+// Devuelve la conexión, asegurando (una vez por proceso) que exista el admin.
+async function db() {
+  const sql = getSql();
+  if (!globalForDb.__ticketeraAdminReady) {
+    globalForDb.__ticketeraAdminReady = ensureAdmin(sql).catch((err) => {
+      globalForDb.__ticketeraAdminReady = undefined;
+      throw err;
+    });
   }
-  return dbInstance;
+  await globalForDb.__ticketeraAdminReady;
+  return sql;
 }
 
 // ---------- Users ----------
 
-export function findUserByEmail(email) {
-  return getDb().prepare("SELECT * FROM users WHERE email = ?").get(email);
+export async function findUserByEmail(email) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM users WHERE email = ${email}`;
+  return plain(row);
 }
 
-export function findUserById(id) {
-  return getDb().prepare("SELECT * FROM users WHERE id = ?").get(id);
+export async function findUserById(id) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM users WHERE id = ${id}`;
+  return plain(row);
 }
 
-export function findUserByGoogleId(googleId) {
-  return getDb().prepare("SELECT * FROM users WHERE google_id = ?").get(googleId);
+export async function findUserByGoogleId(googleId) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM users WHERE google_id = ${googleId}`;
+  return plain(row);
 }
 
-export function createUser({ name, lastName, email, phone, company, passwordHash, provider = "credentials" }) {
-  const result = getDb()
-    .prepare(
-      `INSERT INTO users (name, last_name, email, phone, company, password_hash, provider, role)
-       VALUES (?, ?, ?, ?, ?, ?, ?, 'CLIENT')`
-    )
-    .run(name, lastName ?? "", email, phone ?? null, company ?? null, passwordHash ?? null, provider);
-  return findUserById(result.lastInsertRowid);
+export async function createUser({ name, lastName, email, phone, company, passwordHash, provider = "credentials" }) {
+  const sql = await db();
+  const [row] = await sql`
+    INSERT INTO users (name, last_name, email, phone, company, password_hash, provider, role)
+    VALUES (${name}, ${lastName ?? ""}, ${email}, ${phone ?? null}, ${company ?? null},
+            ${passwordHash ?? null}, ${provider}, 'CLIENT')
+    RETURNING *
+  `;
+  return plain(row);
 }
 
-export function createUserFromGoogle({ name, email, googleId, image }) {
-  const result = getDb()
-    .prepare(
-      `INSERT INTO users (name, email, google_id, image, provider, role)
-       VALUES (?, ?, ?, ?, 'google', 'CLIENT')`
-    )
-    .run(name, email, googleId, image ?? null);
-  return findUserById(result.lastInsertRowid);
+export async function createUserFromGoogle({ name, email, googleId, image }) {
+  const sql = await db();
+  const [row] = await sql`
+    INSERT INTO users (name, email, google_id, image, provider, role)
+    VALUES (${name}, ${email}, ${googleId}, ${image ?? null}, 'google', 'CLIENT')
+    RETURNING *
+  `;
+  return plain(row);
 }
 
-export function linkGoogleAccount(userId, { googleId, image }) {
-  getDb()
-    .prepare("UPDATE users SET google_id = ?, image = COALESCE(?, image), updated_at = ? WHERE id = ?")
-    .run(googleId, image ?? null, new Date().toISOString(), userId);
+export async function linkGoogleAccount(userId, { googleId, image }) {
+  const sql = await db();
+  await sql`
+    UPDATE users SET google_id = ${googleId}, image = COALESCE(${image ?? null}, image), updated_at = now()
+    WHERE id = ${userId}
+  `;
 }
 
-export function setResetToken(userId, token, expiresAt) {
-  getDb()
-    .prepare("UPDATE users SET reset_token = ?, reset_token_expires_at = ?, updated_at = ? WHERE id = ?")
-    .run(token, expiresAt, new Date().toISOString(), userId);
+export async function setResetToken(userId, token, expiresAt) {
+  const sql = await db();
+  await sql`
+    UPDATE users SET reset_token = ${token}, reset_token_expires_at = ${expiresAt}, updated_at = now()
+    WHERE id = ${userId}
+  `;
 }
 
-export function findUserByValidResetToken(token) {
-  return getDb()
-    .prepare("SELECT * FROM users WHERE reset_token = ? AND reset_token_expires_at > ?")
-    .get(token, new Date().toISOString());
+export async function findUserByValidResetToken(token) {
+  const sql = await db();
+  const [row] = await sql`
+    SELECT * FROM users WHERE reset_token = ${token} AND reset_token_expires_at > now()
+  `;
+  return plain(row);
 }
 
-export function resetPassword(userId, passwordHash) {
-  getDb()
-    .prepare(
-      "UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expires_at = NULL, updated_at = ? WHERE id = ?"
-    )
-    .run(passwordHash, new Date().toISOString(), userId);
+export async function resetPassword(userId, passwordHash) {
+  const sql = await db();
+  await sql`
+    UPDATE users
+    SET password_hash = ${passwordHash}, reset_token = NULL, reset_token_expires_at = NULL, updated_at = now()
+    WHERE id = ${userId}
+  `;
 }
 
-export function listClients() {
-  return getDb()
-    .prepare(
-      `SELECT u.*,
-        (SELECT COUNT(*) FROM tickets t WHERE t.user_id = u.id) AS ticket_count,
-        (SELECT COUNT(*) FROM tickets t WHERE t.user_id = u.id AND t.status NOT IN ('CERRADO','CANCELADO','RESUELTO')) AS open_ticket_count
-       FROM users u WHERE u.role = 'CLIENT' ORDER BY u.created_at DESC`
-    )
-    .all();
+export async function listClients() {
+  const sql = await db();
+  const rows = await sql`
+    SELECT u.*,
+      (SELECT COUNT(*)::int FROM tickets t WHERE t.user_id = u.id) AS ticket_count,
+      (SELECT COUNT(*)::int FROM tickets t WHERE t.user_id = u.id
+         AND t.status NOT IN ('CERRADO','CANCELADO','RESUELTO')) AS open_ticket_count
+    FROM users u WHERE u.role = 'CLIENT' ORDER BY u.created_at DESC
+  `;
+  return plainAll(rows);
 }
 
 // ---------- Tickets ----------
 
-function nextTicketNumber(db) {
-  const row = db.prepare("SELECT value FROM counters WHERE name = 'ticket_number'").get();
-  const next = (row?.value ?? 0) + 1;
+export async function createTicket(userId, data) {
+  const sql = await db();
 
-  if (row) {
-    db.prepare("UPDATE counters SET value = ? WHERE name = 'ticket_number'").run(next);
-  } else {
-    db.prepare("INSERT INTO counters (name, value) VALUES ('ticket_number', ?)").run(next);
-  }
+  // Número correlativo y alta del ticket en una misma transacción: el upsert
+  // sobre `counters` es atómico, así que dos tickets simultáneos nunca reciben
+  // el mismo número.
+  const row = await sql.begin(async (tx) => {
+    const [counter] = await tx`
+      INSERT INTO counters (name, value) VALUES ('ticket_number', 1)
+      ON CONFLICT (name) DO UPDATE SET value = counters.value + 1
+      RETURNING value
+    `;
+    const ticketNumber = `SW-${String(counter.value).padStart(6, "0")}`;
 
-  return `SW-${String(next).padStart(6, "0")}`;
-}
-
-export function createTicket(userId, data) {
-  const db = getDb();
-  const ticketNumber = nextTicketNumber(db);
-
-  const result = db
-    .prepare(
-      `INSERT INTO tickets (
+    const [ticket] = await tx`
+      INSERT INTO tickets (
         ticket_number, user_id, subject, description, category, service, url,
         priority, status, preferred_contact, device, operating_system, browser,
         error_message, steps_before_error
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'NUEVO', ?, ?, ?, ?, ?, ?)`
-    )
-    .run(
-      ticketNumber,
-      userId,
-      data.subject,
-      data.description,
-      data.category,
-      data.service ?? null,
-      data.url ?? null,
-      data.priority ?? TICKET_PRIORITY.NORMAL,
-      data.preferredContact ?? PREFERRED_CONTACT.TICKET,
-      data.device ?? null,
-      data.operatingSystem ?? null,
-      data.browser ?? null,
-      data.errorMessage ?? null,
-      data.stepsBeforeError ?? null
-    );
+      ) VALUES (
+        ${ticketNumber}, ${userId}, ${data.subject}, ${data.description}, ${data.category},
+        ${data.service ?? null}, ${data.url ?? null}, ${data.priority ?? TICKET_PRIORITY.NORMAL},
+        'NUEVO', ${data.preferredContact ?? PREFERRED_CONTACT.TICKET}, ${data.device ?? null},
+        ${data.operatingSystem ?? null}, ${data.browser ?? null}, ${data.errorMessage ?? null},
+        ${data.stepsBeforeError ?? null}
+      )
+      RETURNING *
+    `;
+    return ticket;
+  });
 
-  return findTicketById(result.lastInsertRowid);
+  return plain(row);
 }
 
-export function findTicketById(id) {
-  return getDb().prepare("SELECT * FROM tickets WHERE id = ?").get(id);
+export async function findTicketById(id) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM tickets WHERE id = ${id}`;
+  return plain(row);
 }
 
-export function findTicketByNumber(ticketNumber) {
-  return getDb().prepare("SELECT * FROM tickets WHERE ticket_number = ?").get(ticketNumber);
+export async function findTicketByNumber(ticketNumber) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM tickets WHERE ticket_number = ${ticketNumber}`;
+  return plain(row);
 }
 
-export function listTicketsForUser(userId) {
-  return getDb()
-    .prepare("SELECT * FROM tickets WHERE user_id = ? ORDER BY created_at DESC")
-    .all(userId);
+export async function listTicketsForUser(userId) {
+  const sql = await db();
+  const rows = await sql`SELECT * FROM tickets WHERE user_id = ${userId} ORDER BY created_at DESC`;
+  return plainAll(rows);
 }
 
-export function listAllTickets() {
-  return getDb()
-    .prepare(
-      `SELECT t.*, u.name AS client_name, u.last_name AS client_last_name,
-              u.company AS client_company, u.email AS client_email
-       FROM tickets t JOIN users u ON u.id = t.user_id
-       ORDER BY t.created_at DESC`
-    )
-    .all();
+export async function listAllTickets() {
+  const sql = await db();
+  const rows = await sql`
+    SELECT t.*, u.name AS client_name, u.last_name AS client_last_name,
+           u.company AS client_company, u.email AS client_email
+    FROM tickets t JOIN users u ON u.id = t.user_id
+    ORDER BY t.created_at DESC
+  `;
+  return plainAll(rows);
 }
 
-export function updateTicketFields(ticketId, fields) {
+export async function updateTicketFields(ticketId, fields) {
   const allowed = ["status", "priority", "category"];
-  const sets = [];
-  const values = [];
+  const changes = {};
 
   for (const key of allowed) {
-    if (fields[key] !== undefined) {
-      sets.push(`${key} = ?`);
-      values.push(fields[key]);
-    }
+    if (fields[key] !== undefined) changes[key] = fields[key];
   }
-  if (sets.length === 0) return findTicketById(ticketId);
+  if (Object.keys(changes).length === 0) return findTicketById(ticketId);
 
-  sets.push("updated_at = ?");
-  values.push(new Date().toISOString());
+  const now = new Date();
+  changes.updated_at = now;
+  if (fields.status === TICKET_STATUS.CERRADO) changes.closed_at = now;
 
-  if (fields.status === TICKET_STATUS.CERRADO) {
-    sets.push("closed_at = ?");
-    values.push(new Date().toISOString());
-  }
-
-  values.push(ticketId);
-  getDb().prepare(`UPDATE tickets SET ${sets.join(", ")} WHERE id = ?`).run(...values);
-  return findTicketById(ticketId);
+  const sql = await db();
+  const [row] = await sql`
+    UPDATE tickets SET ${sql(changes)} WHERE id = ${ticketId} RETURNING *
+  `;
+  return plain(row);
 }
 
-export function ticketStats(userId = null) {
-  const db = getDb();
-  const where = userId ? "WHERE user_id = ?" : "";
-  const params = userId ? [userId] : [];
-
-  const rows = db
-    .prepare(`SELECT status, COUNT(*) AS count FROM tickets ${where} GROUP BY status`)
-    .all(...params);
+export async function ticketStats(userId = null) {
+  const sql = await db();
+  const rows = userId
+    ? await sql`SELECT status, COUNT(*)::int AS count FROM tickets WHERE user_id = ${userId} GROUP BY status`
+    : await sql`SELECT status, COUNT(*)::int AS count FROM tickets GROUP BY status`;
 
   const stats = Object.fromEntries(Object.keys(TICKET_STATUS).map((s) => [s, 0]));
   for (const row of rows) stats[row.status] = row.count;
@@ -325,45 +280,52 @@ export function ticketStats(userId = null) {
 
 // ---------- Messages ----------
 
-export function addTicketMessage(ticketId, userId, message, isInternal = false) {
-  const result = getDb()
-    .prepare(
-      "INSERT INTO ticket_messages (ticket_id, user_id, message, is_internal) VALUES (?, ?, ?, ?)"
-    )
-    .run(ticketId, userId, message, isInternal ? 1 : 0);
-
-  getDb()
-    .prepare("UPDATE tickets SET updated_at = ? WHERE id = ?")
-    .run(new Date().toISOString(), ticketId);
-
-  return getDb().prepare("SELECT * FROM ticket_messages WHERE id = ?").get(result.lastInsertRowid);
+export async function addTicketMessage(ticketId, userId, message, isInternal = false) {
+  const sql = await db();
+  const row = await sql.begin(async (tx) => {
+    const [created] = await tx`
+      INSERT INTO ticket_messages (ticket_id, user_id, message, is_internal)
+      VALUES (${ticketId}, ${userId}, ${message}, ${isInternal})
+      RETURNING *
+    `;
+    await tx`UPDATE tickets SET updated_at = now() WHERE id = ${ticketId}`;
+    return created;
+  });
+  return plain(row);
 }
 
-export function listTicketMessages(ticketId, { includeInternal = false } = {}) {
-  const query = includeInternal
-    ? "SELECT m.*, u.name AS user_name, u.last_name AS user_last_name, u.role AS user_role FROM ticket_messages m JOIN users u ON u.id = m.user_id WHERE m.ticket_id = ? ORDER BY m.created_at ASC"
-    : "SELECT m.*, u.name AS user_name, u.last_name AS user_last_name, u.role AS user_role FROM ticket_messages m JOIN users u ON u.id = m.user_id WHERE m.ticket_id = ? AND m.is_internal = 0 ORDER BY m.created_at ASC";
-
-  return getDb().prepare(query).all(ticketId);
+export async function listTicketMessages(ticketId, { includeInternal = false } = {}) {
+  const sql = await db();
+  const rows = await sql`
+    SELECT m.*, u.name AS user_name, u.last_name AS user_last_name, u.role AS user_role
+    FROM ticket_messages m JOIN users u ON u.id = m.user_id
+    WHERE m.ticket_id = ${ticketId}
+      ${includeInternal ? sql`` : sql`AND m.is_internal = false`}
+    ORDER BY m.created_at ASC
+  `;
+  return plainAll(rows);
 }
 
 // ---------- Attachments ----------
 
-export function addAttachment({ ticketId, messageId, originalName, storedName, mimeType, size, filePath }) {
-  const result = getDb()
-    .prepare(
-      `INSERT INTO attachments (ticket_id, message_id, original_name, stored_name, mime_type, size, path)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`
-    )
-    .run(ticketId, messageId ?? null, originalName, storedName, mimeType, size, filePath);
-
-  return getDb().prepare("SELECT * FROM attachments WHERE id = ?").get(result.lastInsertRowid);
+export async function addAttachment({ ticketId, messageId, originalName, storedName, mimeType, size, filePath }) {
+  const sql = await db();
+  const [row] = await sql`
+    INSERT INTO attachments (ticket_id, message_id, original_name, stored_name, mime_type, size, path)
+    VALUES (${ticketId}, ${messageId ?? null}, ${originalName}, ${storedName}, ${mimeType}, ${size}, ${filePath})
+    RETURNING *
+  `;
+  return plain(row);
 }
 
-export function listTicketAttachments(ticketId) {
-  return getDb().prepare("SELECT * FROM attachments WHERE ticket_id = ?").all(ticketId);
+export async function listTicketAttachments(ticketId) {
+  const sql = await db();
+  const rows = await sql`SELECT * FROM attachments WHERE ticket_id = ${ticketId}`;
+  return plainAll(rows);
 }
 
-export function findAttachmentById(id) {
-  return getDb().prepare("SELECT * FROM attachments WHERE id = ?").get(id);
+export async function findAttachmentById(id) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM attachments WHERE id = ${id}`;
+  return plain(row);
 }

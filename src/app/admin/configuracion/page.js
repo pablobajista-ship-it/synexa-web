@@ -14,7 +14,17 @@ export default async function AdminConfigPage() {
       label: "Administrador principal",
       value: process.env.ADMIN_EMAIL || "No configurado",
     },
-    { label: "Base de datos", value: process.env.DATABASE_PATH || "./data/ticketera.db" },
+    // Solo el host: DATABASE_URL incluye la contraseña de la base.
+    {
+      label: "Base de datos",
+      value: process.env.DATABASE_URL
+        ? `Postgres (${new URL(process.env.DATABASE_URL).hostname})`
+        : "No configurada",
+    },
+    {
+      label: "Adjuntos",
+      value: process.env.SUPABASE_URL ? "Supabase Storage" : "No configurado",
+    },
     { label: "Login con Google", value: isGoogleLoginConfigured ? "Configurado" : "No configurado" },
     { label: "Entorno", value: process.env.NODE_ENV },
   ];

@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import fs from "node:fs/promises";
 import { auth } from "@/auth";
 import { findAttachmentById, findTicketById } from "@/lib/db";
 import { canAccessTicket } from "@/lib/ticketAccess";
-import { resolveUploadPath } from "@/lib/uploads";
+import { readUploadedFile } from "@/lib/uploads";
 import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 export async function GET(request, { params }) {
@@ -15,17 +14,18 @@ export async function GET(request, { params }) {
   }
 
   const { id } = await params;
-  const attachment = findAttachmentById(Number(id));
+  const attachmentId = Number(id);
+  const attachment = Number.isInteger(attachmentId) ? await findAttachmentById(attachmentId) : null;
   if (!attachment) {
     return NextResponse.json({ error: "Archivo no encontrado." }, { status: 404 });
   }
 
-  const ticket = findTicketById(attachment.ticket_id);
+  const ticket = await findTicketById(attachment.ticket_id);
   if (!canAccessTicket(session, ticket)) {
     return NextResponse.json({ error: "No autorizado." }, { status: 403 });
   }
 
-  const buffer = await fs.readFile(resolveUploadPath(attachment.path));
+  const buffer = await readUploadedFile(attachment.path);
 
   return new NextResponse(buffer, {
     headers: {

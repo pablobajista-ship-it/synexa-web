@@ -18,7 +18,7 @@ export async function POST(request) {
     );
   }
 
-  const user = findUserByValidResetToken(token);
+  const user = await findUserByValidResetToken(token);
   if (!user) {
     return NextResponse.json(
       { error: "El enlace es inválido o expiró. Pedí uno nuevo." },
@@ -26,7 +26,7 @@ export async function POST(request) {
     );
   }
 
-  resetPassword(user.id, bcrypt.hashSync(password, 10));
+  await resetPassword(user.id, bcrypt.hashSync(password, 10));
 
   return NextResponse.json({ ok: true });
 }

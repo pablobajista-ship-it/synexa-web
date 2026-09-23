@@ -9,7 +9,7 @@ import {
   TICKET_CATEGORIES,
   TICKET_PRIORITY,
 } from "@/lib/db";
-import { saveUploadedFile, UploadError } from "@/lib/uploads";
+import { saveUploadedFile, validateUploadedFile, UploadError } from "@/lib/uploads";
 import { notifyTicketCreatedToClient, notifyTicketCreatedToAdmin } from "@/services/notifications";
 import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
@@ -25,7 +25,9 @@ export async function GET() {
   }
 
   const tickets =
-    session.user.role === "ADMIN" ? listAllTickets() : listTicketsForUser(Number(session.user.id));
+    session.user.role === "ADMIN"
+      ? await listAllTickets()
+      : await listTicketsForUser(Number(session.user.id));
 
   return NextResponse.json({ tickets });
 }
@@ -69,13 +71,20 @@ export async function POST(request) {
   const files = formData.getAll("attachments").filter((f) => f instanceof File && f.size > 0);
   if (files.length > MAX_FILES) {
     errors.attachments = `Podés adjuntar como máximo ${MAX_FILES} archivos.`;
+  } else {
+    try {
+      files.forEach(validateUploadedFile);
+    } catch (err) {
+      if (!(err instanceof UploadError)) throw err;
+      errors.attachments = err.message;
+    }
   }
 
   if (Object.keys(errors).length > 0) {
     return NextResponse.json({ errors }, { status: 400 });
   }
 
-  const ticket = createTicket(Number(session.user.id), {
+  const ticket = await createTicket(Number(session.user.id), {
     subject,
     description,
     category,
@@ -90,27 +99,20 @@ export async function POST(request) {
     stepsBeforeError: stepsBeforeError || null,
   });
 
-  try {
-    for (const file of files) {
-      const saved = await saveUploadedFile(file, ticket.ticket_number);
-      addAttachment({
-        ticketId: ticket.id,
-        messageId: null,
-        originalName: saved.originalName,
-        storedName: saved.storedName,
-        mimeType: saved.mimeType,
-        size: saved.size,
-        filePath: saved.filePath,
-      });
-    }
-  } catch (err) {
-    if (err instanceof UploadError) {
-      return NextResponse.json({ errors: { attachments: err.message } }, { status: 400 });
-    }
-    throw err;
+  for (const file of files) {
+    const saved = await saveUploadedFile(file, ticket.ticket_number);
+    await addAttachment({
+      ticketId: ticket.id,
+      messageId: null,
+      originalName: saved.originalName,
+      storedName: saved.storedName,
+      mimeType: saved.mimeType,
+      size: saved.size,
+      filePath: saved.filePath,
+    });
   }
 
-  const client = findUserById(Number(session.user.id));
+  const client = await findUserById(Number(session.user.id));
   notifyTicketCreatedToClient(ticket, client);
   notifyTicketCreatedToAdmin(ticket, client);
 
