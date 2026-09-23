@@ -113,8 +113,10 @@ export async function POST(request) {
   }
 
   const client = await findUserById(Number(session.user.id));
-  notifyTicketCreatedToClient(ticket, client);
-  notifyTicketCreatedToAdmin(ticket, client);
+  await Promise.all([
+    notifyTicketCreatedToClient(ticket, client),
+    notifyTicketCreatedToAdmin(ticket, client),
+  ]);
 
   return NextResponse.json({ ok: true, ticketNumber: ticket.ticket_number });
 }

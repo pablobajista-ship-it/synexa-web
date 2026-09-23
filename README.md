@@ -60,6 +60,8 @@ Copiá `.env.example` a `.env.local` y completá:
 | `SUPABASE_URL` | *Project URL* de Supabase (*Project Settings → API*). |
 | `SUPABASE_SERVICE_ROLE_KEY` | Clave `service_role` de Supabase. Secreta: solo se usa en el servidor para subir/descargar adjuntos. |
 | `SUPABASE_STORAGE_BUCKET` | Opcional, bucket de adjuntos (por defecto `attachments`). |
+| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` | Correo saliente. Con Gmail: `smtp.gmail.com`, `465`, tu Gmail y una *contraseña de aplicación*. Sin ellas, los avisos solo van a la consola. |
+| `MAIL_FROM` / `ADMIN_NOTIFY_EMAIL` | Opcionales: remitente visible y destinatario de los avisos al equipo (por defecto `ADMIN_EMAIL`). |
 | `PORTAL_ENABLED` | `false` oculta el portal de clientes (enlaces y login). Por defecto habilitado. |
 | `AUTH_SECRET` | Clave para firmar sesiones de Auth.js. Generar con `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. |
 | `AUTH_URL` | URL base de la app (`http://localhost:3000` en desarrollo). |
@@ -130,7 +132,7 @@ src/
     Logo.js                   isotipo + wordmark SYNEXA
     (resto)                   formularios, navbar del panel, badges, conversación
   lib/                     acceso a datos (db.js), constantes, uploads, auth helpers
-  services/notifications.js  capa de notificaciones (hoy solo consola; mañana email real)
+  services/notifications.js  correos (SMTP con nodemailer; sin SMTP, solo consola)
   auth.js / auth.config.js  configuración de Auth.js (Credentials + Google)
   proxy.js                 protección de rutas por rol (antes "middleware")
 scripts/seed.js            datos de desarrollo
@@ -171,8 +173,8 @@ tickets vive bajo `/login`, `/dashboard`, `/tickets` y `/admin`.
 
 ## Qué queda preparado para más adelante
 
-- Envío real de correos (la capa `src/services/notifications.js` ya está separada del
-  resto del código; solo hay que conectar un proveedor).
+- Dominio propio para el correo (hoy sale desde Gmail): basta cambiar las variables `SMTP_*`
+  a un proveedor como Resend o Brevo, sin tocar código.
 - Roles `AGENT`/`TECHNICIAN` (el campo `role` ya soporta agregarlos).
 - Ficha de cliente ampliada (proyectos, servicios contratados, dominios, hosting).
 - Estadísticas más avanzadas (tiempos de respuesta/resolución).

@@ -74,11 +74,14 @@ export async function POST(request, { params }) {
     await updateTicketFields(ticket.id, { status: TICKET_STATUS.EN_PROCESO });
   }
 
-  const client = await findUserById(ticket.user_id);
-  if (session.user.role === "ADMIN") {
-    notifyNewReplyToClient(ticket, client);
-  } else {
-    notifyNewReplyToAdmin(ticket, client);
+  // Las notas internas no se notifican: el cliente no puede verlas.
+  if (!isInternal) {
+    const client = await findUserById(ticket.user_id);
+    if (session.user.role === "ADMIN") {
+      await notifyNewReplyToClient(ticket, client, message);
+    } else {
+      await notifyNewReplyToAdmin(ticket, client, message);
+    }
   }
 
   return NextResponse.json({ ok: true });
