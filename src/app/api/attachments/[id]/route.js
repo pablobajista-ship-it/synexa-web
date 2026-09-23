@@ -4,8 +4,11 @@ import { auth } from "@/auth";
 import { findAttachmentById, findTicketById } from "@/lib/db";
 import { canAccessTicket } from "@/lib/ticketAccess";
 import { resolveUploadPath } from "@/lib/uploads";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 export async function GET(request, { params }) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "No autorizado." }, { status: 401 });

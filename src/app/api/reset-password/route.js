@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { findUserByValidResetToken, resetPassword } from "@/lib/db";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 export async function POST(request) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const { token, password } = await request.json();
 
   if (!token) {

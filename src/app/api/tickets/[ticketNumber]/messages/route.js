@@ -11,10 +11,13 @@ import {
 import { canAccessTicket } from "@/lib/ticketAccess";
 import { saveUploadedFile, UploadError } from "@/lib/uploads";
 import { notifyNewReplyToClient, notifyNewReplyToAdmin } from "@/services/notifications";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 const MAX_FILES = 5;
 
 export async function POST(request, { params }) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "No autorizado." }, { status: 401 });

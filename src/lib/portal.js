@@ -31,3 +31,24 @@ export function isPortalHref(href) {
     PORTAL_PREFIXES.some((prefix) => href === prefix || href.startsWith(`${prefix}/`))
   );
 }
+
+/**
+ * Respuesta de las rutas de API del portal cuando está oculto.
+ *
+ * Con el portal deshabilitado no hay base de datos, así que estas rutas no
+ * pueden operar. Sin este guard responderían un 500 al intentar abrir el
+ * archivo SQLite; un 503 dice lo correcto: el servicio no está disponible.
+ *
+ * No se aplica a /api/auth/[...nextauth]: el SessionProvider del cliente
+ * consulta /api/auth/session en todas las páginas, incluidas las públicas,
+ * y esa lectura no toca la base de datos (la sesión es un JWT).
+ *
+ * Usa Response.json() en vez de NextResponse para que este módulo —que
+ * también importan componentes de la web pública— no dependa de next/server.
+ */
+export function portalDisabledResponse() {
+  return Response.json(
+    { error: "El Portal de Clientes no está disponible en este momento." },
+    { status: 503, headers: { "Cache-Control": "no-store" } }
+  );
+}

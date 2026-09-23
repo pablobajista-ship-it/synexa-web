@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 import { findUserByEmail, setResetToken } from "@/lib/db";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 export async function POST(request) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const { email } = await request.json();
   const trimmedEmail = email?.toString().trim();
 

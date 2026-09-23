@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { findTicketByNumber, updateTicketFields, TICKET_STATUS, TICKET_PRIORITY, TICKET_CATEGORIES } from "@/lib/db";
 import { canAccessTicket } from "@/lib/ticketAccess";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 export async function PATCH(request, { params }) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const session = await auth();
   if (!session?.user || session.user.role !== "ADMIN") {
     return NextResponse.json({ error: "No autorizado." }, { status: 403 });

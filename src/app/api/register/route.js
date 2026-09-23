@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { findUserByEmail, createUser } from "@/lib/db";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const body = await request.json();
   const name = body.name?.toString().trim();
   const lastName = body.lastName?.toString().trim();

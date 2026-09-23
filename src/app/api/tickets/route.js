@@ -11,11 +11,14 @@ import {
 } from "@/lib/db";
 import { saveUploadedFile, UploadError } from "@/lib/uploads";
 import { notifyTicketCreatedToClient, notifyTicketCreatedToAdmin } from "@/services/notifications";
+import { isPortalEnabled, portalDisabledResponse } from "@/lib/portal";
 
 const URL_RE = /^https?:\/\/[^\s]+\.[^\s]+$/i;
 const MAX_FILES = 5;
 
 export async function GET() {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "No autorizado." }, { status: 401 });
@@ -28,6 +31,8 @@ export async function GET() {
 }
 
 export async function POST(request) {
+  if (!isPortalEnabled()) return portalDisabledResponse();
+
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "No autorizado." }, { status: 401 });
