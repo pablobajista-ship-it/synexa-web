@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Container from "@/components/ui/Container";
-import Card from "@/components/ui/Card";
 import Eyebrow from "@/components/ui/Eyebrow";
+import Reveal from "@/components/marketing/Reveal";
+import Button from "@/components/ui/Button";
 import { IconArrowRight } from "@/components/marketing/icons";
 
 const SERVICES = [
@@ -39,39 +40,63 @@ const SERVICES = [
 
 export default function ServicesGrid() {
   return (
-    <section id="soluciones" className="py-20 sm:py-24 bg-white">
+    <section id="soluciones" className="section-pad bg-white">
       <Container>
-        <div className="max-w-2xl mb-12">
+        <Reveal className="max-w-[720px] mb-12 lg:mb-14">
           <Eyebrow>Soluciones</Eyebrow>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-navy)] mt-3 mb-4">
+          <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[2.75rem] leading-[1.14] font-bold tracking-[-0.02em] text-[var(--color-navy)] mt-4 mb-5 text-balance">
             Todo lo que tu empresa necesita, en un mismo lugar
           </h2>
-          <p className="text-[var(--color-gray-dark)] text-base leading-relaxed">
-            Desde el primer sitio web hasta plataformas complejas: te acompañamos en
-            cada etapa del crecimiento digital de tu negocio.
+          <p className="text-[var(--color-gray-dark)] text-[17px] leading-[1.7]">
+            Desde el primer sitio web hasta plataformas complejas: te acompañamos en cada
+            etapa del crecimiento digital de tu negocio.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SERVICES.map(({ image, title, text }) => (
-            <Card key={title} className="p-6 hover:border-[var(--color-blue)] transition-colors">
-              <div className="relative w-14 h-14 mb-4">
-                <Image src={image} alt={title} fill sizes="56px" className="object-contain" />
-              </div>
-              <h3 className="font-bold text-[var(--color-navy)] mb-1.5">{title}</h3>
-              <p className="text-[13.5px] text-[var(--color-gray-dark)] leading-relaxed mb-4">
-                {text}
-              </p>
-              <a
-                href="#contacto"
-                className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[var(--color-blue)] hover:text-[var(--color-blue-dark)]"
-              >
-                Conversemos
-                <IconArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </Card>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+          {SERVICES.map(({ image, title, text }, i) => (
+            <Reveal key={title} delay={i * 60} className="h-full">
+              <article className="card-hover group h-full flex flex-col p-8 lg:p-9 rounded-[1.75rem] border border-[var(--color-border)]/80 bg-gradient-to-b from-white to-[var(--color-surface-muted)] shadow-[0_1px_2px_rgba(11,31,68,0.04)] hover:border-[var(--color-teal)]/35">
+                <div className="relative w-[76px] h-[76px] lg:w-[88px] lg:h-[88px] mb-6 transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transform-none">
+                  <Image
+                    src={image}
+                    alt=""
+                    fill
+                    sizes="88px"
+                    loading="lazy"
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="font-bold text-[var(--color-navy)] text-[21px] leading-snug mb-3">
+                  {title}
+                </h3>
+                <p className="text-[15px] text-[var(--color-gray-dark)] leading-[1.7] mb-7">
+                  {text}
+                </p>
+                <a
+                  href="#contacto"
+                  className="mt-auto inline-flex items-center gap-2 text-[14px] font-bold text-[var(--color-blue)] hover:text-[var(--color-blue-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded"
+                >
+                  <span>
+                    Conversemos
+                    <span className="sr-only"> sobre {title}</span>
+                  </span>
+                  <IconArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none" />
+                </a>
+              </article>
+            </Reveal>
           ))}
         </div>
+
+        <Reveal delay={120} className="mt-12 flex flex-col sm:flex-row sm:items-center justify-center gap-4 text-center">
+          <p className="text-[15px] text-[var(--color-gray-dark)]">
+            ¿Quieres ver el detalle de cada servicio?
+          </p>
+          <Button href="/servicios-y-precios" variant="secondary" size="lg">
+            Ver servicios y precios
+            <IconArrowRight className="w-4 h-4" />
+          </Button>
+        </Reveal>
       </Container>
     </section>
   );

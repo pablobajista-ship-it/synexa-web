@@ -71,3 +71,169 @@ body {
 .brand-safe-area {
   padding: 0.5em;
 }
+
+/* Reveal-on-scroll: usado por <Reveal>. Muy sutil a propósito. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Patrón de puntos extremadamente sutil para bloques oscuros. */
+.dot-grid {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Refinamiento visual de la homepage                                  */
+/* ------------------------------------------------------------------ */
+
+/* Ritmo vertical común a todas las secciones de marketing:
+   mobile 56px · tablet 72px · desktop 96px · desktop XL 112px */
+.section-pad {
+  padding-block: 3.5rem;
+}
+@media (min-width: 640px) {
+  .section-pad {
+    padding-block: 4.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-pad {
+    padding-block: 6rem;
+  }
+}
+@media (min-width: 1280px) {
+  .section-pad {
+    padding-block: 7rem;
+  }
+}
+
+/* Cuadrícula tecnológica muy tenue para fondos oscuros. Se desvanece
+   hacia los bordes con una máscara radial para no verse como "papel
+   milimetrado". */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 30%, transparent 100%);
+}
+
+/* Tarjetas de interfaz tipo "glass" que flotan sobre las fotografías. */
+.glass-card {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 10px 30px rgba(3, 12, 32, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 12px 32px rgba(11, 31, 68, 0.14),
+    0 1px 2px rgba(11, 31, 68, 0.06);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Entrada del hero: fade + translate escalonado por --d (delay). */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  opacity: 0;
+  animation: hero-in 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Flotación muy suave para las tarjetas glass (8s, 6px de recorrido). */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.float-soft {
+  animation: float-soft 8s ease-in-out infinite;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Línea conectora del proceso: se "dibuja" cuando el bloque entra en
+   viewport (el padre recibe .reveal-visible desde <Reveal>). */
+.process-line {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) 0.25s;
+}
+
+.reveal-visible .process-line {
+  transform: scaleX(1);
+}
+
+/* Glow teal muy tenue al hacer hover sobre tarjetas claras. */
+.card-hover {
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.6, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.2, 0.6, 0.2, 1),
+    border-color 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 40px -14px rgba(11, 31, 68, 0.18),
+    0 0 0 1px rgba(20, 184, 166, 0.25),
+    0 0 32px -6px rgba(20, 184, 166, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter {
+    opacity: 1;
+    animation: none;
+  }
+  .float-soft {
+    animation: none;
+  }
+  .process-line {
+    transform: scaleX(1);
+    transition: none;
+  }
+  .card-hover,
+  .card-hover:hover {
+    transition: none;
+    transform: none;
+  }
+}

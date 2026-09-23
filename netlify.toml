@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Netlify compila better-sqlite3 (módulo nativo) durante el install, así que
+  # conviene fijar una versión LTS con binarios precompilados disponibles.
+  NODE_VERSION = "22"

@@ -43,9 +43,12 @@ export default async function AdminDashboardPage() {
           </Link>
         </div>
 
-        <div className="grid sm:grid-cols-3 lg:grid-cols-7 gap-3 mb-8">
+        <div className="flex flex-wrap gap-3 mb-8">
           {cards.map((c) => (
-            <div key={c.label} className="bg-white rounded-xl border border-slate-200 p-4">
+            <div
+              key={c.label}
+              className="flex-1 min-w-[140px] bg-white rounded-xl border border-slate-200 p-4"
+            >
               <p className="text-2xl font-bold text-slate-900">{c.value}</p>
               <p className="text-[12px] text-slate-500">{c.label}</p>
             </div>

@@ -1,5 +1,7 @@
 import Container from "@/components/ui/Container";
 import Eyebrow from "@/components/ui/Eyebrow";
+import Reveal from "@/components/marketing/Reveal";
+import DashboardShowcase from "@/components/marketing/DashboardShowcase";
 import { IconCheck } from "@/components/marketing/icons";
 
 const VALUES = [
@@ -27,32 +29,38 @@ const VALUES = [
 
 export default function ValueProps() {
   return (
-    <section id="nosotros" className="py-20 sm:py-24 bg-[var(--color-surface-muted)]">
-      <Container className="grid lg:grid-cols-[0.9fr_1.1fr] gap-14 items-start">
-        <div>
+    <section id="nosotros" className="section-pad bg-[var(--color-surface-muted)]">
+      <Container className="grid lg:grid-cols-2 gap-14 lg:gap-16 xl:gap-20 items-center">
+        <Reveal>
           <Eyebrow>Por qué SYNEXA</Eyebrow>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-navy)] mt-3 mb-4">
+          <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[2.75rem] leading-[1.14] font-bold tracking-[-0.02em] text-[var(--color-navy)] mt-4 mb-5 text-balance">
             Un mundo más conectado para tu negocio
           </h2>
-          <p className="text-[var(--color-gray-dark)] leading-relaxed">
+          <p className="text-[var(--color-gray-dark)] text-[17px] leading-[1.7] mb-9 max-w-[540px]">
             Desarrollamos soluciones digitales que conectan personas, procesos y
             oportunidades — con la seriedad de un partner tecnológico de largo plazo.
           </p>
-        </div>
 
-        <ul className="grid sm:grid-cols-2 gap-5">
-          {VALUES.map((v) => (
-            <li key={v.title} className="flex gap-3">
-              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[var(--color-teal)]/15 text-[var(--color-teal-dark)] flex items-center justify-center mt-0.5">
-                <IconCheck className="w-4 h-4" />
-              </span>
-              <div>
-                <p className="font-bold text-[var(--color-navy)] text-sm mb-0.5">{v.title}</p>
-                <p className="text-[13.5px] text-[var(--color-gray-dark)] leading-relaxed">{v.text}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+          <ul className="space-y-6">
+            {VALUES.map((v) => (
+              <li key={v.title} className="flex gap-4">
+                <span className="flex-shrink-0 w-8 h-8 rounded-xl bg-[var(--color-teal)]/15 text-[var(--color-teal-dark)] flex items-center justify-center mt-0.5">
+                  <IconCheck className="w-[18px] h-[18px]" />
+                </span>
+                <div>
+                  <p className="font-bold text-[var(--color-navy)] text-[16px] mb-1">{v.title}</p>
+                  <p className="text-[15px] text-[var(--color-gray-dark)] leading-[1.65]">
+                    {v.text}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <DashboardShowcase />
+        </Reveal>
       </Container>
     </section>
   );

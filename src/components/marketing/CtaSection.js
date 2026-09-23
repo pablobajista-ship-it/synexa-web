@@ -1,33 +1,64 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import Reveal from "@/components/marketing/Reveal";
 
-export default function CtaSection() {
+/**
+ * CTA final oscuro. Se usa tanto en la Homepage como en páginas interiores:
+ * los textos y botones son configurables por props y mantienen los valores
+ * de la Homepage como defecto.
+ */
+export default function CtaSection({
+  id = "contacto",
+  eyebrow,
+  title = "Conversemos sobre tu proyecto",
+  description = "Cuéntanos qué quieres lograr, qué problema necesitas resolver o qué idea tienes en mente. Podemos ayudarte a convertirla en una solución digital.",
+  primaryAction = { href: "mailto:hola@synexa.com", label: "Hablemos" },
+  secondaryAction = { href: "/login", label: "Portal de Clientes" },
+}) {
   return (
-    <section id="contacto" className="py-20 sm:py-24 bg-[var(--color-navy)] relative overflow-hidden">
+    <section
+      id={id}
+      className="section-pad bg-[#081736] border-t border-white/10 relative overflow-hidden scroll-mt-20"
+    >
       <div
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 opacity-70"
         style={{
           background:
-            "radial-gradient(40% 60% at 15% 20%, rgba(20,184,166,0.25), transparent), radial-gradient(40% 60% at 85% 80%, rgba(37,99,235,0.3), transparent)",
+            "radial-gradient(45% 65% at 15% 15%, rgba(20,184,166,0.28), transparent 70%), radial-gradient(45% 65% at 85% 85%, rgba(37,99,235,0.32), transparent 70%)",
         }}
       />
-      <Container className="relative text-center max-w-2xl">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-          Conversemos sobre tu proyecto
-        </h2>
-        <p className="text-white/70 leading-relaxed mb-9">
-          Contanos qué necesita tu empresa y te ayudamos a definir la mejor solución,
-          sin compromiso.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button href="mailto:hola@synexa.com" variant="accent" size="lg">
-            Hablemos
-          </Button>
-          <Button href="/login" variant="on-dark-outline" size="lg">
-            Portal de clientes
-          </Button>
-        </div>
-      </Container>
+      {/* Líneas horizontales muy suaves */}
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--color-teal)]/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-[12%] top-1/2 h-px bg-gradient-to-r from-transparent via-white/[0.07] to-transparent" />
+
+      <Reveal className="relative">
+        <Container className="text-center max-w-[820px]">
+          {eyebrow ? (
+            <span className="inline-flex items-center gap-2.5 text-[13px] font-bold uppercase tracking-[0.16em] text-[var(--color-teal)] mb-5">
+              <span className="w-7 h-px bg-[var(--color-teal)]" />
+              {eyebrow}
+            </span>
+          ) : null}
+          <h2 className="text-[2.15rem] sm:text-[2.75rem] lg:text-[3.25rem] leading-[1.1] font-bold tracking-[-0.02em] text-white mb-6 text-balance">
+            {title}
+          </h2>
+          <p className="text-white/72 text-[17px] sm:text-lg leading-[1.7] mb-10 max-w-[640px] mx-auto">
+            {description}
+          </p>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+            {primaryAction ? (
+              <Button href={primaryAction.href} variant="accent" size="xl">
+                {primaryAction.label}
+              </Button>
+            ) : null}
+            {secondaryAction ? (
+              <Button href={secondaryAction.href} variant="on-dark-outline" size="xl">
+                {secondaryAction.label}
+              </Button>
+            ) : null}
+          </div>
+        </Container>
+      </Reveal>
     </section>
   );
 }
