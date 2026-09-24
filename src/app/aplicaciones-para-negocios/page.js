@@ -69,6 +69,12 @@ export default async function AplicacionesParaNegociosPage() {
           }
           note="No necesitas saber qué tecnología utilizar. Cuéntanos cómo funciona tu empresa y diseñaremos la solución contigo."
           aside={<AppHeroVisual />}
+          image={{
+            src: "/images/heroes/hero-aplicaciones.webp",
+            alt: "",
+            position: "65% center",
+            variant: "backdrop",
+          }}
         />
 
         {/* §7 — De lo manual a lo digital */}

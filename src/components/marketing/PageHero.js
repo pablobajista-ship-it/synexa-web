@@ -1,15 +1,27 @@
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { LogoMark } from "@/components/Logo";
+
+/* Luz de marca (azul → teal) que unifica la foto con la paleta; la misma
+   que usa el hero de la Homepage. */
+const BRAND_LIGHT =
+  "linear-gradient(135deg, rgba(37,99,235,0.45), transparent 45%, rgba(20,184,166,0.35))";
 
 /**
  * Hero interior reutilizable para páginas que no son la Homepage.
  * Comparte el lenguaje del hero principal —azul profundo, glows azul/teal,
- * cuadrícula tecnológica, isotipo tenue— pero es más contenido: sin
- * fotografía y con menos altura.
+ * cuadrícula tecnológica, isotipo tenue— con menos altura.
  *
  * `badges` renderiza pequeñas cápsulas glassmorphism bajo el CTA, `note`
  * una frase de apoyo y `aside` una pieza visual a la derecha (que además
  * convierte el hero en dos columnas en desktop).
+ *
+ * `image` ({ src, alt, position, variant }) agrega una fotografía:
+ * - variant "side" (por defecto): ocupa la derecha en desktop y se funde con
+ *   el navy hacia la izquierda, como en la Homepage.
+ * - variant "backdrop": fondo tenue a lo ancho, para heros con `aside`, donde
+ *   la pieza visual debe seguir siendo protagonista.
+ * En mobile ambas se muestran como fondo tenue detrás del texto.
  */
 export default function PageHero({
   eyebrow,
@@ -19,9 +31,13 @@ export default function PageHero({
   badges = [],
   note,
   aside,
+  image,
 }) {
+  const imageVariant = image?.variant ?? "side";
+
   return (
     <section className="relative overflow-hidden bg-[var(--color-navy)] pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
+      {image ? <HeroPhoto image={image} variant={imageVariant} /> : null}
       <div className="pointer-events-none absolute inset-0 tech-grid" />
       <div
         className="pointer-events-none absolute inset-0"
@@ -40,13 +56,15 @@ export default function PageHero({
             "linear-gradient(to bottom, transparent, rgba(20,184,166,0.5) 40%, rgba(37,99,235,0.4) 60%, transparent)",
         }}
       />
-      {/* Isotipo como marca de agua */}
-      <div
-        className="pointer-events-none absolute -right-16 top-1/2 -translate-y-1/2 opacity-[0.06] hidden lg:block"
-        aria-hidden="true"
-      >
-        <LogoMark size={460} rounded={false} className="w-[460px] h-auto" />
-      </div>
+      {/* Isotipo como marca de agua (solo sin foto: sobre ella ensucia) */}
+      {image ? null : (
+        <div
+          className="pointer-events-none absolute -right-16 top-1/2 -translate-y-1/2 opacity-[0.06] hidden lg:block"
+          aria-hidden="true"
+        >
+          <LogoMark size={460} rounded={false} className="w-[460px] h-auto" />
+        </div>
+      )}
 
       <Container className="relative">
         <div
@@ -128,5 +146,63 @@ export default function PageHero({
 
       <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--color-teal)]/40 to-transparent" />
     </section>
+  );
+}
+
+/* Fotografía del hero. Una sola <Image> cuyo contenedor cambia por CSS
+   (fondo tenue en mobile, panel derecho en desktop) para que el navegador
+   descargue un único archivo; con dos <Image> ocultas por breakpoint se
+   bajarían ambas. */
+function HeroPhoto({ image, variant }) {
+  const side = variant === "side";
+
+  return (
+    <div
+      className={
+        side
+          ? "pointer-events-none absolute inset-0 lg:left-auto lg:w-[55%] xl:w-[58%]"
+          : "pointer-events-none absolute inset-0"
+      }
+      aria-hidden={image.alt ? undefined : "true"}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt ?? ""}
+        fill
+        sizes={side ? "(min-width: 1280px) 58vw, (min-width: 1024px) 55vw, 100vw" : "100vw"}
+        className={side ? "object-cover opacity-30 lg:opacity-100" : "object-cover opacity-80"}
+        style={{ objectPosition: image.position ?? "center" }}
+        loading="eager"
+        fetchPriority="high"
+      />
+
+      {side ? (
+        <>
+          {/* Mobile: velo navy para que el texto se lea sobre la foto */}
+          <div className="absolute inset-0 bg-[var(--color-navy)]/60 lg:hidden" />
+          {/* Desktop: fusión hacia el navy por la izquierda, base y techo */}
+          <div
+            className="absolute inset-0 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(to right, #0b1f44 0%, rgba(11,31,68,0.95) 16%, rgba(11,31,68,0.65) 34%, rgba(11,31,68,0.2) 56%, transparent 76%)",
+            }}
+          />
+          <div className="absolute inset-0 hidden lg:block bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/10 to-transparent" />
+          <div className="absolute inset-0 hidden lg:block bg-gradient-to-b from-[var(--color-navy)]/50 via-transparent to-transparent" />
+        </>
+      ) : (
+        /* Backdrop: más denso a la izquierda (texto) y abierto a la derecha */
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(11,31,68,0.95) 0%, rgba(11,31,68,0.78) 36%, rgba(11,31,68,0.4) 66%, rgba(11,31,68,0.22) 100%)",
+          }}
+        />
+      )}
+
+      <div className="absolute inset-0 mix-blend-overlay opacity-80" style={{ background: BRAND_LIGHT }} />
+    </div>
   );
 }

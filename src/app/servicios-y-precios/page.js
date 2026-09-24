@@ -113,6 +113,11 @@ export default async function ServiciosYPreciosPage() {
             "Infraestructura administrada",
             "Planes de soporte mensual",
           ]}
+          image={{
+            src: "/images/heroes/hero-servicios.webp",
+            alt: "Escritorio de desarrollo con laptop, monitor, tablet y teléfono mostrando un mismo sitio web adaptado a cada pantalla",
+            position: "70% center",
+          }}
         />
 
         {/* ---------- Accesos por grupo ---------- */}

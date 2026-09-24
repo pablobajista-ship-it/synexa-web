@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { auth, isGoogleLoginConfigured } from "@/auth";
 import Logo from "@/components/Logo";
 import LandingAuth from "@/components/LandingAuth";
@@ -27,26 +28,71 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[var(--color-surface-muted)] px-6 py-12">
-      <div className="w-full max-w-sm">
-        <div className="flex flex-col items-center text-center mb-8">
-          <Link href="/">
-            <Logo size={38} />
-          </Link>
-          <p className="text-sm text-[var(--color-gray-dark)] mt-4">
-            Portal de clientes — Centro de Atención y Soporte
+    <div className="min-h-screen w-full grid lg:grid-cols-2 bg-[var(--color-surface-muted)]">
+      <div className="flex items-center justify-center px-6 py-12">
+        <div className="w-full max-w-sm">
+          <div className="flex flex-col items-center text-center mb-8">
+            <Link href="/">
+              <Logo size={38} />
+            </Link>
+            <p className="text-sm text-[var(--color-gray-dark)] mt-4">
+              Portal de clientes — Centro de Atención y Soporte
+            </p>
+          </div>
+
+          <LandingAuth googleEnabled={isGoogleLoginConfigured} />
+
+          <p className="text-center mt-5 text-sm text-[var(--color-gray-dark)]">
+            <Link href="/" className="font-semibold text-[var(--color-blue)] hover:underline">
+              ← Volver al sitio principal
+            </Link>
           </p>
         </div>
+      </div>
 
-        <LandingAuth googleEnabled={isGoogleLoginConfigured} />
+      <PortalShowcase />
+    </div>
+  );
+}
 
-        <p className="text-center mt-5 text-sm text-[var(--color-gray-dark)]">
-          <Link href="/" className="font-semibold text-[var(--color-blue)] hover:underline">
-            ← Volver al sitio principal
-          </Link>
+/* Panel fotográfico del login (solo desktop): da contexto de marca sin
+   competir con el formulario. */
+function PortalShowcase() {
+  return (
+    <aside className="relative hidden lg:flex items-end overflow-hidden bg-[var(--color-navy)]">
+      <Image
+        src="/images/heroes/hero-portal.webp"
+        alt="Especialista de soporte de SYNEXA atendiendo solicitudes frente a dos monitores"
+        fill
+        /* El panel se oculta bajo lg: "1px" hace que en mobile el navegador
+           elija la variante más chica en vez de la foto completa. */
+        sizes="(min-width: 1024px) 50vw, 1px"
+        className="object-cover object-[60%_center]"
+        loading="eager"
+        fetchPriority="high"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/35 to-transparent" />
+      <div
+        className="absolute inset-0 mix-blend-overlay opacity-70"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(37,99,235,0.45), transparent 45%, rgba(20,184,166,0.35))",
+        }}
+      />
+
+      <div className="relative p-12 xl:p-16 max-w-[560px]">
+        <span className="inline-flex items-center gap-2.5 text-[13px] font-bold uppercase tracking-[0.16em] text-[var(--color-teal)] mb-4">
+          <span className="w-7 h-px bg-[var(--color-teal)]" />
+          Centro de Atención y Soporte
+        </span>
+        <p className="text-[2rem] xl:text-[2.3rem] leading-[1.15] font-bold tracking-[-0.02em] text-white mb-4 text-balance">
+          Tu equipo de soporte, a un mensaje de distancia.
+        </p>
+        <p className="text-white/72 text-[16px] leading-[1.7]">
+          Crea tickets, adjunta archivos y sigue cada respuesta en un solo lugar.
         </p>
       </div>
-    </div>
+    </aside>
   );
 }
 

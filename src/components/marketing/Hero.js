@@ -5,7 +5,8 @@ import { IconCheck } from "@/components/marketing/icons";
 
 const HIGHLIGHTS = ["Soluciones a medida", "Soporte cercano", "Tecnología escalable"];
 
-const HERO_ALT = "Sala de reuniones moderna de SYNEXA con vista nocturna a la ciudad";
+const HERO_ALT =
+  "Equipo de SYNEXA revisando un proyecto en una sala de reuniones con vista nocturna a la ciudad";
 
 /* Luz de marca (azul → teal) que unifica la foto con la paleta. */
 const BRAND_LIGHT =
@@ -41,15 +42,16 @@ export default function Hero() {
       {/* ---------- Fotografía desktop: avanza hacia el centro ----------
           Ocupa el 62% derecho de la sección y se funde con el navy por la
           izquierda y por la base, sin división dura. object-position hacia
-          la derecha para mostrar la mesa de reuniones y el skyline. */}
+          la derecha para mostrar al equipo y el skyline. */}
       <div className="absolute inset-y-0 right-0 hidden lg:block w-[58%] xl:w-[62%]">
         <Image
-          src="/images/hero-synexa.webp"
+          src="/images/heroes/hero-inicio.webp"
           alt={HERO_ALT}
           fill
           sizes="(min-width: 1280px) 62vw, (min-width: 1024px) 58vw, 100vw"
-          className="object-cover object-[78%_center]"
-          priority
+          className="object-cover object-[72%_center]"
+          loading="eager"
+          fetchPriority="high"
         />
         {/* Fusión hacia el navy: izquierda (ancha) + base + techo */}
         <div
@@ -119,12 +121,13 @@ export default function Hero() {
           <div className="absolute -inset-6 rounded-[2rem] bg-[var(--color-blue)]/20 blur-3xl" />
           <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl shadow-black/40">
             <Image
-              src="/images/hero-synexa.webp"
+              src="/images/heroes/hero-inicio.webp"
               alt={HERO_ALT}
               fill
               sizes="(min-width: 640px) 90vw, 100vw"
-              className="object-cover object-[75%_center]"
-              priority
+              className="object-cover object-[70%_center]"
+              loading="eager"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/70 via-transparent to-[var(--color-navy)]/20" />
             <div className="absolute inset-0 mix-blend-overlay opacity-80" style={{ background: BRAND_LIGHT }} />
