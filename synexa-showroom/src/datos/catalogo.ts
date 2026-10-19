@@ -5,8 +5,8 @@
  * Aquí viven nombres, precios, límites y alcances. Ningún componente repite
  * estos valores. Importes: pesos chilenos NETOS (+ IVA).
  *
- * ESTADO: los precios de los 19 paquetes son una PROPUESTA pendiente de
- * validación (ver docs/catalogo/conciliacion-precios.md). Los límites
+ * ESTADO: cuatro paquetes (Landing, Web PYME, Catálogo Básico y Rediseño) usan el precio
+ * VIGENTE del sitio; los otros 15 son una PROPUESTA pendiente de validación (ver docs/catalogo/conciliacion-precios.md). Los límites
  * contractuales solo se completan cuando existen en el documento comercial
  * vigente; el resto queda en `null` y la interfaz muestra «Por definir».
  */
@@ -80,7 +80,7 @@ export const PAQUETES: Paquete[] = [
     id: "landing-captacion",
     nombre: "Landing de Captación",
     linea: "landing",
-    precio: 390000,
+    precio: 349000,
     resumen: "Una sola página, pensada para convertir visitas en consultas por WhatsApp o formulario.",
     publico: "Negocios de servicios, campañas y profesionales que necesitan captar clientes ya.",
     problema: "Se anuncian o los recomiendan, pero no tienen una página clara que explique la oferta y facilite el contacto.",
@@ -100,7 +100,7 @@ export const PAQUETES: Paquete[] = [
     id: "web-pyme",
     nombre: "Web PYME",
     linea: "sitios-web",
-    precio: 690000,
+    precio: 649000,
     resumen: "Sitio completo de varias páginas para presentar tu empresa, productos y datos de contacto.",
     publico: "Pequeños negocios con local o servicios que necesitan una presencia seria.",
     problema: "Dependen de redes sociales y no tienen un lugar propio con horarios, ubicación y oferta ordenada.",
@@ -160,7 +160,7 @@ export const PAQUETES: Paquete[] = [
     id: "catalogo-basico",
     nombre: "Catálogo Básico",
     linea: "catalogos",
-    precio: 890000,
+    precio: 749000,
     resumen: "Catálogo sencillo con categorías, buscador y consulta comercial, sin venta en línea.",
     publico: "Comercios con productos que quieren mostrarse y recibir consultas.",
     problema: "Los clientes preguntan siempre por lo mismo y no hay dónde ver la oferta completa.",
@@ -420,7 +420,7 @@ export const PAQUETES: Paquete[] = [
     id: "rediseno-acotado",
     nombre: "Rediseño Web Acotado",
     linea: "rediseno",
-    precio: 590000,
+    precio: 490000,
     resumen: "Modernizamos un sitio existente: mejor diseño, móvil, navegación y orden del contenido.",
     publico: "Empresas con un sitio que funciona pero se ve antiguo.",
     problema: "El sitio no se ve bien en celular y el visitante no encuentra lo que busca.",
