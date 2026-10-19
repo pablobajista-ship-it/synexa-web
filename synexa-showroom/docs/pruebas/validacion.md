@@ -58,6 +58,6 @@ Resultado: **sin hallazgos**. Antes de este recorrido, las revisiones de las tan
 - **Textos de «Proyectos realizados»:** redactados a partir de las capturas y la documentación de cada repositorio; sin revisión de los clientes.
 
 ## 7. Pendientes que bloquean la publicación (ver `integracion-next.md`)
-1. Cerrar los precios de los 15 paquetes que siguen con el precio propuesto (4 ya usan el vigente); los módulos siguen «Por cotizar».
+1. Cerrar los precios de los 5 paquetes que siguen con el precio propuesto (14 ya usan el vigente); los módulos siguen «Por cotizar».
 2. Confirmación escrita de FAL sobre el uso comercial de las imágenes generadas.
 3. Autorización expresa de despliegue.

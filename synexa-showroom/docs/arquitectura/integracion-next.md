@@ -34,7 +34,7 @@ Mover los datos y las pantallas del catálogo, fichas y herramientas a rutas de 
 3. **Fase 2, solo si el SEO lo justifica:** llevar a Next el catálogo y las fichas (datos ya independientes del framework, ver `src/datos/`), y dejar las demos como SPA montada bajo `/demos`.
 
 ## Prerrequisitos antes de publicar (cualquier opción)
-1. **Precios.** Se aplicó una decisión mixta: 4 paquetes con precio vigente y 15 con precio propuesto, estos últimos pendientes de decisión caso por caso (ver `docs/catalogo/conciliacion-precios.md`). Los módulos adicionales siguen «Por cotizar».
+1. **Precios.** Se aplicó el precio vigente en 14 paquetes; 5 (Catálogo Avanzado, Portal Comercial, 2 Radios y Portal Multimedia) conservan el precio propuesto y esperan decisión (ver `docs/catalogo/conciliacion-precios.md`). Los módulos adicionales siguen «Por cotizar».
 2. **Licencia de las imágenes.** Obtener confirmación escrita de FAL sobre uso comercial de lo generado (`docs/guias/generar-imagenes.md`).
 3. **Textos contractuales.** Los límites en «Por definir» deben completarse o quedar así de forma explícita.
 4. **Proyectos realizados.** Pedir el visto bueno de cada cliente para mostrar sus capturas y enlaces.

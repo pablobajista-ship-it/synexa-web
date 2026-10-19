@@ -5,8 +5,8 @@
  * Aquí viven nombres, precios, límites y alcances. Ningún componente repite
  * estos valores. Importes: pesos chilenos NETOS (+ IVA).
  *
- * ESTADO: cuatro paquetes (Landing, Web PYME, Catálogo Básico y Rediseño) usan el precio
- * VIGENTE del sitio; los otros 15 son una PROPUESTA pendiente de validación (ver docs/catalogo/conciliacion-precios.md). Los límites
+ * ESTADO: 14 paquetes usan el precio VIGENTE del sitio; los otros 5 (Catálogo Avanzado, Portal
+ * Comercial Especializado, las dos Radios y Portal Multimedia) son una PROPUESTA pendiente de validación (ver docs/catalogo/conciliacion-precios.md). Los límites
  * contractuales solo se completan cuando existen en el documento comercial
  * vigente; el resto queda en `null` y la interfaz muestra «Por definir».
  */
@@ -120,7 +120,7 @@ export const PAQUETES: Paquete[] = [
     id: "corporativa-estandar",
     nombre: "Corporativa Estándar",
     linea: "sitios-web",
-    precio: 1190000,
+    precio: 949000,
     resumen: "Sitio de empresa con proyectos, equipo y noticias, organizado como una publicación editorial.",
     publico: "Empresas de servicios o industria que venden por confianza y trayectoria.",
     problema: "Tienen mucho que mostrar (proyectos, equipo, noticias) y un sitio simple no lo ordena bien.",
@@ -140,7 +140,7 @@ export const PAQUETES: Paquete[] = [
     id: "corporativa-plus",
     nombre: "Corporativa Plus",
     linea: "sitios-web",
-    precio: 1790000,
+    precio: 1290000,
     resumen: "Sitio corporativo con listados filtrables, fichas y publicaciones que tú mismo administras.",
     publico: "Empresas que publican muchos elementos (propiedades, proyectos, casos) y necesitan filtrarlos.",
     problema: "Actualizar un listado extenso a mano es lento y el visitante no encuentra lo que busca.",
@@ -220,7 +220,7 @@ export const PAQUETES: Paquete[] = [
     id: "ecommerce-esencial",
     nombre: "E-commerce Esencial",
     linea: "comercio-electronico",
-    precio: 1290000,
+    precio: 990000,
     resumen: "Tienda online completa en su nivel inicial: catálogo, carrito, checkout y gestión de pedidos.",
     publico: "Negocios que quieren empezar a vender por internet.",
     problema: "Venden por mensaje o en persona y pierden ventas fuera de horario.",
@@ -240,7 +240,7 @@ export const PAQUETES: Paquete[] = [
     id: "ecommerce-crecimiento",
     nombre: "E-commerce Crecimiento",
     linea: "comercio-electronico",
-    precio: 2290000,
+    precio: 1490000,
     resumen: "Tienda con variantes, cupones, estados de pedido y un panel de ventas para decidir mejor.",
     publico: "Tiendas que ya venden y necesitan operar y crecer con más control.",
     problema: "Tallas, colores, descuentos y pedidos desbordan una tienda básica.",
@@ -320,7 +320,7 @@ export const PAQUETES: Paquete[] = [
     id: "agenda-online",
     nombre: "Agenda Online",
     linea: "agenda",
-    precio: 1190000,
+    precio: 890000,
     resumen: "Tus clientes reservan hora eligiendo profesional, fecha y horario; tú administras la agenda.",
     publico: "Negocios que viven de las citas: barberías, clínicas, estudios.",
     problema: "Agendar por mensaje consume tiempo y genera cruces de horario.",
@@ -340,7 +340,7 @@ export const PAQUETES: Paquete[] = [
     id: "portal-clientes",
     nombre: "Portal de Clientes",
     linea: "portal-clientes",
-    precio: 1990000,
+    precio: 1490000,
     resumen: "Espacio privado donde cada cliente ve sus proyectos, documentos, solicitudes y mensajes.",
     publico: "Empresas de servicios que atienden proyectos largos.",
     problema: "Documentos y avances viajan por correo y WhatsApp, y nadie tiene la versión final.",
@@ -360,7 +360,7 @@ export const PAQUETES: Paquete[] = [
     id: "panel-datos",
     nombre: "Panel de Datos",
     linea: "datos-procesos",
-    precio: 1690000,
+    precio: 1290000,
     resumen: "Base de datos con panel web: registros, búsquedas, indicadores y reportes en un solo lugar.",
     publico: "Empresas que hoy controlan inventario o registros en planillas.",
     problema: "La información está dispersa y nadie confía en la planilla.",
@@ -380,7 +380,7 @@ export const PAQUETES: Paquete[] = [
     id: "plataforma-procesos",
     nombre: "Plataforma de Procesos",
     linea: "datos-procesos",
-    precio: 3290000,
+    precio: 1990000,
     resumen: "Gestiona flujos de trabajo: órdenes, asignaciones, estados, historial y alertas.",
     publico: "Empresas de servicios técnicos con varias personas involucradas en cada trabajo.",
     problema: "Nadie sabe en qué estado está cada trabajo ni quién lo tiene.",
@@ -400,7 +400,7 @@ export const PAQUETES: Paquete[] = [
     id: "mvp-medida",
     nombre: "MVP a Medida",
     linea: "datos-procesos",
-    precio: 4990000,
+    precio: 2490000,
     resumen: "Un producto mínimo viable con reglas de negocio propias, usuarios, roles y seguimiento.",
     publico: "Empresas con un proceso único que ninguna herramienta estándar cubre.",
     problema: "Adaptar un software genérico cuesta más que su valor y no encaja.",
@@ -440,7 +440,7 @@ export const PAQUETES: Paquete[] = [
     id: "integracion-api-simple",
     nombre: "Integración API Simple",
     linea: "integraciones",
-    precio: 690000,
+    precio: 390000,
     resumen: "Conectamos dos plataformas con un flujo acotado de sincronización y un historial visible.",
     publico: "Empresas que digitan los mismos datos en dos sistemas.",
     problema: "Copiar datos a mano entre sistemas genera errores y pérdida de tiempo.",

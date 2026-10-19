@@ -5,12 +5,12 @@ import { EQUIVALENCIA_VIGENTE } from "./equivalenciaVigente";
 
 /** Tabla de precios propuesta en el brief (netos, CLP). */
 const PRECIOS: Record<string, number> = {
-  "landing-captacion": 349000, "web-pyme": 649000, "corporativa-estandar": 1190000, "corporativa-plus": 1790000,
+  "landing-captacion": 349000, "web-pyme": 649000, "corporativa-estandar": 949000, "corporativa-plus": 1290000,
   "catalogo-basico": 749000, "catalogo-avanzado": 1990000, "portal-comercial-especializado": 3490000,
-  "ecommerce-esencial": 1290000, "ecommerce-crecimiento": 2290000, "radio-esencial": 790000,
-  "radio-profesional": 1990000, "portal-multimedia": 3490000, "agenda-online": 1190000, "portal-clientes": 1990000,
-  "panel-datos": 1690000, "plataforma-procesos": 3290000, "mvp-medida": 4990000, "rediseno-acotado": 490000,
-  "integracion-api-simple": 690000,
+  "ecommerce-esencial": 990000, "ecommerce-crecimiento": 1490000, "radio-esencial": 790000,
+  "radio-profesional": 1990000, "portal-multimedia": 3490000, "agenda-online": 890000, "portal-clientes": 1490000,
+  "panel-datos": 1290000, "plataforma-procesos": 1990000, "mvp-medida": 2490000, "rediseno-acotado": 490000,
+  "integracion-api-simple": 390000,
 };
 
 describe("catálogo", () => {

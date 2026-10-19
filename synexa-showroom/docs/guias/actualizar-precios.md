@@ -22,4 +22,4 @@ La lista está en `MODULOS` (mismo archivo). Mientras `precio` sea `null` se mue
 Están en `src/datos/infraSoporte.ts` y reflejan el documento vigente del sitio (`src/data/infrastructurePlans.js` y `src/data/supportPlans.js`). Si el sitio cambia, actualiza ambos lugares.
 
 ## Antes de publicar
-Cuatro paquetes usan el precio vigente del sitio; los otros 15 son una **propuesta pendiente de validación** (ver `docs/catalogo/conciliacion-precios.md`). No los publiques como definitivos sin esa aprobación.
+14 paquetes usan el precio vigente del sitio; los otros 5 son una **propuesta pendiente de validación** (ver `docs/catalogo/conciliacion-precios.md`). No los publiques como definitivos sin esa aprobación.
