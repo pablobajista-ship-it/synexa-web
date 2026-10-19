@@ -1,0 +1,436 @@
+[
+  {
+    "empresa": "brillo-car",
+    "id": "banner-capot",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "Abstracto, sin emblemas.",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/banner-capot.webp",
+    "bytes": 97746
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "galeria-2",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "Llanta y pinza; sin texto legible.",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/galeria-2.webp",
+    "bytes": 81884
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "profesional",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "Sin insignias visibles.",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/profesional.webp",
+    "bytes": 61984
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "hero",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Sin emblemas; la silueta recuerda a un modelo real.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/hero.webp",
+    "bytes": 105138
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "galeria-1",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "SUV sin emblemas ni texto.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/galeria-1.webp",
+    "bytes": 75032
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "galeria-3",
+    "variante": 2,
+    "estado": "reserva",
+    "nota": "Sin texto ni emblema; la parrilla recuerda a un modelo real.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/galeria-3.webp",
+    "bytes": 129080
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "interior",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "Sin logotipos visibles; el diseño sigue pareciendo un modelo real.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/interior.webp",
+    "bytes": 93256
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "antes",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "Par coherente; sin emblemas visibles.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/antes.webp",
+    "bytes": 68900
+  },
+  {
+    "empresa": "brillo-car",
+    "id": "despues",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "Generada con «antes» como referencia.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/brillo-car/despues.webp",
+    "bytes": 63890
+  },
+  {
+    "empresa": "novasur",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/hero.webp",
+    "bytes": 339892
+  },
+  {
+    "empresa": "novasur",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra el texto «TANK 12».",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/banner.webp",
+    "bytes": 286030
+  },
+  {
+    "empresa": "novasur",
+    "id": "ingenieros",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/ingenieros.webp",
+    "bytes": 175846
+  },
+  {
+    "empresa": "novasur",
+    "id": "proyecto-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/proyecto-1.webp",
+    "bytes": 120446
+  },
+  {
+    "empresa": "novasur",
+    "id": "proyecto-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/proyecto-2.webp",
+    "bytes": 263466
+  },
+  {
+    "empresa": "novasur",
+    "id": "proyecto-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/proyecto-3.webp",
+    "bytes": 202924
+  },
+  {
+    "empresa": "novasur",
+    "id": "equipamiento",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 tiene rótulos ilegibles.",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/equipamiento.webp",
+    "bytes": 114678
+  },
+  {
+    "empresa": "novasur",
+    "id": "equipo-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/equipo-1.webp",
+    "bytes": 66940
+  },
+  {
+    "empresa": "novasur",
+    "id": "equipo-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/novasur/equipo-2.webp",
+    "bytes": 75820
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/hero.webp",
+    "bytes": 161966
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/banner.webp",
+    "bytes": 210366
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "evento-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/evento-1.webp",
+    "bytes": 160482
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "evento-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "Pantalla de laptop con interfaz pequeña; la variante 2 muestra marcas legibles.",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/evento-2.webp",
+    "bytes": 114234
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "evento-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/evento-3.webp",
+    "bytes": 126164
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "tecnica-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/tecnica-1.webp",
+    "bytes": 108484
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "tecnica-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "Rótulos diminutos ilegibles.",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/tecnica-2.webp",
+    "bytes": 125116
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-03",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-03.webp",
+    "bytes": 25204
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-04",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-04.webp",
+    "bytes": 15944
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-06",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "Etiqueta mínima en la parte posterior; aceptable.",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-06.webp",
+    "bytes": 35224
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-01",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-01.webp",
+    "bytes": 30124
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-02",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-02.webp",
+    "bytes": 19666
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-05",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Rótulo diminuto ilegible en la carcasa.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-05.webp",
+    "bytes": 31438
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-07",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-07.webp",
+    "bytes": 27332
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-08",
+    "variante": 1,
+    "estado": "regenerar",
+    "nota": "Muestra una marca legible; sin variante limpia.",
+    "ronda": "r2"
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-09",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Microtextos del panel ilegibles.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-09.webp",
+    "bytes": 42234
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-10",
+    "variante": 2,
+    "estado": "reserva",
+    "nota": "Marcas diminutas ilegibles en los módulos.",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-10.webp",
+    "bytes": 98516
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-11",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "ronda": "r2",
+    "archivo": "scripts/fal/_salida/preseleccion/lumina-pro/equipo-11.webp",
+    "bytes": 18268
+  },
+  {
+    "empresa": "lumina-pro",
+    "id": "equipo-12",
+    "variante": 1,
+    "estado": "regenerar",
+    "nota": "Ambas variantes muestran marcas legibles.",
+    "ronda": "r2"
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/hero.webp",
+    "bytes": 136006
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "banner",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/banner.webp",
+    "bytes": 182312
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "cabina",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/cabina.webp",
+    "bytes": 75970
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "equipamiento",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/equipamiento.webp",
+    "bytes": 83468
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "editorial",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/editorial.webp",
+    "bytes": 64580
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "ambiente-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/ambiente-1.webp",
+    "bytes": 91522
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "ambiente-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/ambiente-2.webp",
+    "bytes": 77840
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "locutor-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/locutor-1.webp",
+    "bytes": 62966
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "locutor-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/locutor-2.webp",
+    "bytes": 80616
+  },
+  {
+    "empresa": "frecuencia-mix",
+    "id": "locutor-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/frecuencia-mix/locutor-3.webp",
+    "bytes": 114024
+  }
+]

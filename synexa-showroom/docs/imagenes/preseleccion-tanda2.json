@@ -1,0 +1,614 @@
+[
+  {
+    "empresa": "puerto-fm",
+    "id": "banner",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/banner.webp",
+    "bytes": 143154
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "cabina",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 muestra una marca en el brazo del micrófono.",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/cabina.webp",
+    "bytes": 58228
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "consola",
+    "variante": 2,
+    "estado": "reserva",
+    "nota": "Marca «K&M» pequeña en los brazos de micrófono.",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/consola.webp",
+    "bytes": 108408
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/hero.webp",
+    "bytes": 131764
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "locutor-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/locutor-1.webp",
+    "bytes": 75120
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "locutor-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/locutor-2.webp",
+    "bytes": 70110
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "locutor-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/locutor-3.webp",
+    "bytes": 66324
+  },
+  {
+    "empresa": "puerto-fm",
+    "id": "microfonos",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puerto-fm/microfonos.webp",
+    "bytes": 66832
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/banner.webp",
+    "bytes": 317594
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "decada-70",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/decada-70.webp",
+    "bytes": 153084
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "decada-80",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/decada-80.webp",
+    "bytes": 155898
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "decada-90",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra «CONCERT».",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/decada-90.webp",
+    "bytes": 167262
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "equipos",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/equipos.webp",
+    "bytes": 108498
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/hero.webp",
+    "bytes": 252548
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "locutor-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/locutor-1.webp",
+    "bytes": 135754
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "locutor-2",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Cartel «RADIO» genérico al fondo.",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/locutor-2.webp",
+    "bytes": 108972
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "locutor-3",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/locutor-3.webp",
+    "bytes": 109390
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "programa",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Cuaderno con garabatos ilegibles.",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/programa.webp",
+    "bytes": 113584
+  },
+  {
+    "empresa": "tiempo-retro",
+    "id": "vinilos",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/tiempo-retro/vinilos.webp",
+    "bytes": 118802
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/hero.webp",
+    "bytes": 252778
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "ruta",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/ruta.webp",
+    "bytes": 171054
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "urbana",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/urbana.webp",
+    "bytes": 143706
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/banner.webp",
+    "bytes": 155396
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "accesorio-01",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/accesorio-01.webp",
+    "bytes": 33224
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "accesorio-02",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/accesorio-02.webp",
+    "bytes": 92174
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "accesorio-03",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/accesorio-03.webp",
+    "bytes": 31474
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "accesorio-04",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Microtexto ilegible en las luces.",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/accesorio-04.webp",
+    "bytes": 44426
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-01",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-01.webp",
+    "bytes": 54486
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-02",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-02.webp",
+    "bytes": 46984
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-03",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-03.webp",
+    "bytes": 46510
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-04",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-04.webp",
+    "bytes": 45932
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-05",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-05.webp",
+    "bytes": 48058
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-06",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-06.webp",
+    "bytes": 53646
+  },
+  {
+    "empresa": "vertice-bikes",
+    "id": "bici-07",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/vertice-bikes/bici-07.webp",
+    "bytes": 53158
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/hero.webp",
+    "bytes": 188548
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/banner.webp",
+    "bytes": 223788
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "perro",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra «COTTON ROPE TOY».",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/perro.webp",
+    "bytes": 208848
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "gato",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra «COZY KNIT».",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/gato.webp",
+    "bytes": 122446
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "alimento-lifestyle",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/alimento-lifestyle.webp",
+    "bytes": 116484
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-01",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-01.webp",
+    "bytes": 18274
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-02",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-02.webp",
+    "bytes": 19878
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-03",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-03.webp",
+    "bytes": 31882
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-04",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-04.webp",
+    "bytes": 62566
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-05",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-05.webp",
+    "bytes": 44290
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-06",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-06.webp",
+    "bytes": 38402
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-07",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-07.webp",
+    "bytes": 58968
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-08",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-08.webp",
+    "bytes": 32248
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-09",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-09.webp",
+    "bytes": 39850
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-10",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-10.webp",
+    "bytes": 87418
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-11",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-11.webp",
+    "bytes": 47494
+  },
+  {
+    "empresa": "huella-viva",
+    "id": "producto-12",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/huella-viva/producto-12.webp",
+    "bytes": 62458
+  },
+  {
+    "empresa": "rango",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra el logotipo de una marca real en las zapatillas.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/hero.webp",
+    "bytes": 235468
+  },
+  {
+    "empresa": "rango",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/banner.webp",
+    "bytes": 186868
+  },
+  {
+    "empresa": "rango",
+    "id": "editorial-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra un logotipo en las zapatillas.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/editorial-1.webp",
+    "bytes": 121238
+  },
+  {
+    "empresa": "rango",
+    "id": "editorial-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/editorial-2.webp",
+    "bytes": 147604
+  },
+  {
+    "empresa": "rango",
+    "id": "editorial-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/editorial-3.webp",
+    "bytes": 122624
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-01",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Microtexto ilegible en el pecho.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-01.webp",
+    "bytes": 33880
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-02",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-02.webp",
+    "bytes": 107170
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-03",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 era un collage.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-03.webp",
+    "bytes": 84936
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-04",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "Logotipo similar a una marca real; la variante 1 es un collage.",
+    "ronda": "r2",
+    "archivo": "public/assets/rango/producto-04.webp"
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-05",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 era un collage.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-05.webp",
+    "bytes": 54770
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-06",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 mostraba texto.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-06.webp",
+    "bytes": 91438
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-07",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-07.webp",
+    "bytes": 81074
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-08",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Rayas laterales parecidas a una marca conocida.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-08.webp",
+    "bytes": 145584
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-09",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 era un collage.",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-09.webp",
+    "bytes": 38558
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-10",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-10.webp",
+    "bytes": 53092
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-11",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-11.webp",
+    "bytes": 24556
+  },
+  {
+    "empresa": "rango",
+    "id": "producto-12",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rango/producto-12.webp",
+    "bytes": 85448
+  }
+]

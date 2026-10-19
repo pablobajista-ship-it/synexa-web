@@ -1,0 +1,488 @@
+[
+  {
+    "empresa": "arista",
+    "id": "agente",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/agente.webp",
+    "bytes": 41854
+  },
+  {
+    "empresa": "arista",
+    "id": "banner",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/banner.webp",
+    "bytes": 346564
+  },
+  {
+    "empresa": "arista",
+    "id": "cocina",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/cocina.webp",
+    "bytes": 106676
+  },
+  {
+    "empresa": "arista",
+    "id": "dormitorio",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/dormitorio.webp",
+    "bytes": 129154
+  },
+  {
+    "empresa": "arista",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra un SUV con silueta de marca real.",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/hero.webp",
+    "bytes": 292868
+  },
+  {
+    "empresa": "arista",
+    "id": "living",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/living.webp",
+    "bytes": 139238
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-1.webp",
+    "bytes": 150306
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-2.webp",
+    "bytes": 184264
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-3",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 muestra un vehículo reconocible.",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-3.webp",
+    "bytes": 153678
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-4",
+    "variante": 2,
+    "estado": "reserva",
+    "nota": "La variante 1 era un collage; el SUV de la variante 2 es pequeño y de silueta genérica.",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-4.webp",
+    "bytes": 214842
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-5",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-5.webp",
+    "bytes": 126192
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-6",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-6.webp",
+    "bytes": 147954
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-7",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-7.webp",
+    "bytes": 219428
+  },
+  {
+    "empresa": "arista",
+    "id": "propiedad-8",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/arista/propiedad-8.webp",
+    "bytes": 95170
+  },
+  {
+    "empresa": "trama",
+    "id": "equipo",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/equipo.webp",
+    "bytes": 102562
+  },
+  {
+    "empresa": "trama",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/hero.webp",
+    "bytes": 195790
+  },
+  {
+    "empresa": "trama",
+    "id": "interior-1",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/interior-1.webp",
+    "bytes": 105236
+  },
+  {
+    "empresa": "trama",
+    "id": "interior-2",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/interior-2.webp",
+    "bytes": 71278
+  },
+  {
+    "empresa": "trama",
+    "id": "interior-3",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/interior-3.webp",
+    "bytes": 97222
+  },
+  {
+    "empresa": "trama",
+    "id": "maqueta",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra un texto borroso al fondo.",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/maqueta.webp",
+    "bytes": 89948
+  },
+  {
+    "empresa": "trama",
+    "id": "planos",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/planos.webp",
+    "bytes": 107348
+  },
+  {
+    "empresa": "trama",
+    "id": "proyecto-1",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/proyecto-1.webp",
+    "bytes": 107344
+  },
+  {
+    "empresa": "trama",
+    "id": "proyecto-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/proyecto-2.webp",
+    "bytes": 152336
+  },
+  {
+    "empresa": "trama",
+    "id": "proyecto-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/proyecto-3.webp",
+    "bytes": 249688
+  },
+  {
+    "empresa": "trama",
+    "id": "proyecto-4",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/trama/proyecto-4.webp",
+    "bytes": 164280
+  },
+  {
+    "empresa": "rutastock",
+    "id": "bodega",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra «LOGISTICS SERVICES» en el equipo.",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/bodega.webp",
+    "bytes": 190112
+  },
+  {
+    "empresa": "rutastock",
+    "id": "centro",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra «LOGISTICS» y «SPEED 10».",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/centro.webp",
+    "bytes": 121738
+  },
+  {
+    "empresa": "rutastock",
+    "id": "distribucion",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Furgones de silueta similar a un modelo comercial real.",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/distribucion.webp",
+    "bytes": 129344
+  },
+  {
+    "empresa": "rutastock",
+    "id": "escaneo",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Etiquetas de cajas con microtexto ilegible.",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/escaneo.webp",
+    "bytes": 116632
+  },
+  {
+    "empresa": "rutastock",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/hero.webp",
+    "bytes": 371236
+  },
+  {
+    "empresa": "rutastock",
+    "id": "operaciones-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/operaciones-1.webp",
+    "bytes": 87192
+  },
+  {
+    "empresa": "rutastock",
+    "id": "operaciones-2",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "La variante 1 muestra un cartel «AISLE 14 / ZONE B».",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/operaciones-2.webp",
+    "bytes": 69526
+  },
+  {
+    "empresa": "rutastock",
+    "id": "productos",
+    "variante": 2,
+    "estado": "reserva",
+    "nota": "Envases con microtexto ilegible.",
+    "archivo": "scripts/fal/_salida/preseleccion/rutastock/productos.webp",
+    "bytes": 98644
+  },
+  {
+    "empresa": "servimant",
+    "id": "equipos",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/equipos.webp",
+    "bytes": 199234
+  },
+  {
+    "empresa": "servimant",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/hero.webp",
+    "bytes": 389612
+  },
+  {
+    "empresa": "servimant",
+    "id": "instalaciones",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Manómetros con numeración ilegible.",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/instalaciones.webp",
+    "bytes": 194420
+  },
+  {
+    "empresa": "servimant",
+    "id": "taller",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/taller.webp",
+    "bytes": 143076
+  },
+  {
+    "empresa": "servimant",
+    "id": "tecnico-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/tecnico-1.webp",
+    "bytes": 78134
+  },
+  {
+    "empresa": "servimant",
+    "id": "tecnico-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "La variante 2 muestra una pantalla de tableta con interfaz inventada.",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/tecnico-2.webp",
+    "bytes": 110292
+  },
+  {
+    "empresa": "servimant",
+    "id": "tecnicos",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/tecnicos.webp",
+    "bytes": 131496
+  },
+  {
+    "empresa": "servimant",
+    "id": "vehiculo",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Furgón antiguo de silueta genérica; la variante 2 es un modelo comercial reconocible.",
+    "archivo": "scripts/fal/_salida/preseleccion/servimant/vehiculo.webp",
+    "bytes": 151946
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "centro",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/centro.webp",
+    "bytes": 71388
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "equipos",
+    "variante": 1,
+    "estado": "reserva",
+    "nota": "Pantalla con la palabra «Dashboard» en pequeño.",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/equipos.webp",
+    "bytes": 60554
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "especialista-1",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/especialista-1.webp",
+    "bytes": 65622
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "especialista-2",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/especialista-2.webp",
+    "bytes": 69780
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "especialista-3",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/especialista-3.webp",
+    "bytes": 65636
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "hero",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/hero.webp",
+    "bytes": 181946
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "mesa-soporte",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/mesa-soporte.webp",
+    "bytes": 67624
+  },
+  {
+    "empresa": "mesaflow",
+    "id": "oficina",
+    "variante": 2,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/mesaflow/oficina.webp",
+    "bytes": 175290
+  },
+  {
+    "empresa": "puentesync",
+    "id": "ambiente",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puentesync/ambiente.webp",
+    "bytes": 145186
+  },
+  {
+    "empresa": "puentesync",
+    "id": "editorial",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puentesync/editorial.webp",
+    "bytes": 279308
+  },
+  {
+    "empresa": "puentesync",
+    "id": "equipo",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puentesync/equipo.webp",
+    "bytes": 80674
+  },
+  {
+    "empresa": "puentesync",
+    "id": "hero",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puentesync/hero.webp",
+    "bytes": 367532
+  },
+  {
+    "empresa": "puentesync",
+    "id": "infraestructura",
+    "variante": 1,
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/puentesync/infraestructura.webp",
+    "bytes": 112788
+  }
+]

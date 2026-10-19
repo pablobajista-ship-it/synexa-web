@@ -1,0 +1,3 @@
+# Vista previa del SYNEXA Showroom: no indexar. Quitar este archivo solo al publicar de verdad.
+User-agent: *
+Disallow: /

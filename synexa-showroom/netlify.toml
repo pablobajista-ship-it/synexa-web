@@ -1,0 +1,51 @@
+# Vista previa del SYNEXA Showroom en Netlify (opción C, fase 1).
+# Sitio estático aparte del sitio principal. Si el repositorio es el del sitio SYNEXA, en Netlify
+# hay que fijar «Base directory» = synexa-showroom (ver docs/arquitectura/vista-previa-netlify.md).
+
+[build]
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# La aplicación es una SPA: cualquier ruta que no sea un archivo devuelve index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# --- Cabeceras -----------------------------------------------------------------------------------
+# Vista previa: no indexar. QUITAR este bloque (y robots.txt) solo al publicar de verdad.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    # Todo es local (fuentes, imágenes y scripts); el estilo en línea lo usa React.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+# Archivos con hash en el nombre: caché larga e inmutable.
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Imágenes de las demos (sin hash): caché moderada para poder reemplazarlas.
+[[headers]]
+  for = "/assets/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

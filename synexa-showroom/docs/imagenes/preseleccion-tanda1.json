@@ -1,0 +1,562 @@
+[
+  {
+    "empresa": "molino-sur",
+    "id": "hero",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/hero.webp",
+    "bytes": 219186
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "banner",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/banner.webp",
+    "bytes": 254342
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "fachada",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "reserva",
+    "nota": "Rótulo «OPEN» pequeño y dibujos en la vitrina; la variante 1 mostraba «THE ARTISAN BAKERY».",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/fachada.webp",
+    "bytes": 246074
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "cafeteria",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/cafeteria.webp",
+    "bytes": 160192
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "pasteleria",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/pasteleria.webp",
+    "bytes": 156384
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "barista",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/barista.webp",
+    "bytes": 102468
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "pan-rustico",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/pan-rustico.webp",
+    "bytes": 127760
+  },
+  {
+    "empresa": "molino-sur",
+    "id": "galeria",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "La variante 2 mostraba etiquetas de texto.",
+    "archivo": "scripts/fal/_salida/preseleccion/molino-sur/galeria.webp",
+    "bytes": 191606
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "hero",
+    "variante": 2,
+    "ronda": "r2",
+    "estado": "ok",
+    "nota": "Regenerada con rótulo en blanco.",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/hero.webp",
+    "bytes": 399928
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "banner",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "reserva",
+    "nota": "Cartel «AISLE 8» y envases con palabras genéricas (RICE, PASTA).",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/banner.webp",
+    "bytes": 272666
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "abarrotes",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "reserva",
+    "nota": "Frascos con etiquetas genéricas en inglés (RICE, PASTA).",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/abarrotes.webp",
+    "bytes": 143014
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "frutas",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "La variante 2 mostraba rótulos «FRESH PRODUCE».",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/frutas.webp",
+    "bytes": 180320
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-01",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-01.webp",
+    "bytes": 37400
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-02",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-02.webp",
+    "bytes": 73356
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-03",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-03.webp",
+    "bytes": 64664
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-04",
+    "variante": 1,
+    "ronda": "r2",
+    "estado": "ok",
+    "nota": "Regenerada: la versión original mostraba una hoja en una bandeja.",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-04.webp",
+    "bytes": 66118
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-05",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-05.webp",
+    "bytes": 86916
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-06",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-06.webp",
+    "bytes": 101722
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-07",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-07.webp",
+    "bytes": 31980
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-08",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-08.webp",
+    "bytes": 11464
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-09",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-09.webp",
+    "bytes": 73548
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-10",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-10.webp",
+    "bytes": 13220
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-11",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-11.webp",
+    "bytes": 12528
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-12",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-12.webp",
+    "bytes": 18282
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-13",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "La variante 1 reproducía la forma de una botella de marca conocida.",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-13.webp",
+    "bytes": 14180
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-14",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-14.webp",
+    "bytes": 12476
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-15",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-15.webp",
+    "bytes": 12804
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-16",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-16.webp",
+    "bytes": 18318
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-17",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-17.webp",
+    "bytes": 22522
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-18",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-18.webp",
+    "bytes": 26062
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-19",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-19.webp",
+    "bytes": 16026
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-20",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-20.webp",
+    "bytes": 20338
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-21",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "La variante 2 mostraba la palabra «Cleaner».",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-21.webp",
+    "bytes": 15716
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-22",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-22.webp",
+    "bytes": 71042
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-23",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-23.webp",
+    "bytes": 33272
+  },
+  {
+    "empresa": "punto-barrio",
+    "id": "producto-24",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/punto-barrio/producto-24.webp",
+    "bytes": 27676
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "hero",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/hero.webp",
+    "bytes": 239664
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "banner",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/banner.webp",
+    "bytes": 170534
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "local",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/local.webp",
+    "bytes": 177280
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "sillon",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/sillon.webp",
+    "bytes": 140278
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "herramientas",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/herramientas.webp",
+    "bytes": 104950
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "barbero-1",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "La variante 2 mostraba «BARBER Co».",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/barbero-1.webp",
+    "bytes": 95938
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "barbero-2",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/barbero-2.webp",
+    "bytes": 74532
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "barbero-3",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/barbero-3.webp",
+    "bytes": 88550
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "corte-1",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/corte-1.webp",
+    "bytes": 106114
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "corte-2",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/corte-2.webp",
+    "bytes": 134900
+  },
+  {
+    "empresa": "barba-norte",
+    "id": "corte-3",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "La variante 2 mostraba botellas de una marca de whisky real.",
+    "archivo": "scripts/fal/_salida/preseleccion/barba-norte/corte-3.webp",
+    "bytes": 96940
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "hero",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/hero.webp",
+    "bytes": 252516
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "banner",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/banner.webp",
+    "bytes": 216136
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "cocina",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/cocina.webp",
+    "bytes": 98626
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "interior",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/interior.webp",
+    "bytes": 101724
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "terraza",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/terraza.webp",
+    "bytes": 154294
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "plato-1",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/plato-1.webp",
+    "bytes": 199844
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "plato-2",
+    "variante": 2,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/plato-2.webp",
+    "bytes": 57072
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "plato-3",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/plato-3.webp",
+    "bytes": 44514
+  },
+  {
+    "empresa": "brasa-costa",
+    "id": "plato-4",
+    "variante": 1,
+    "ronda": "r1",
+    "estado": "ok",
+    "nota": "",
+    "archivo": "scripts/fal/_salida/preseleccion/brasa-costa/plato-4.webp",
+    "bytes": 57398
+  }
+]
