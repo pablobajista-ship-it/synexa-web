@@ -1,142 +1,133 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
-import HeroCards from "@/components/marketing/HeroCards";
-import { IconCheck } from "@/components/marketing/icons";
-
-const HIGHLIGHTS = ["Soluciones a medida", "Soporte cercano", "Tecnología escalable"];
+import { IconArrowRight } from "@/components/marketing/icons";
+import {
+  SHOWROOM_FAMILIES,
+  SHOWROOM_HREF,
+  SHOWROOM_TOTAL_PACKAGES,
+} from "@/data/showroomTeaser";
+import { formatAmount } from "@/lib/pricing";
 
 const HERO_ALT =
-  "Equipo de SYNEXA revisando un proyecto en una sala de reuniones con vista nocturna a la ciudad";
+  "Monitor, notebook y teléfono mostrando diseños de páginas web modernas sobre un escritorio oscuro";
 
-/* Luz de marca (azul → teal) que unifica la foto con la paleta. */
-const BRAND_LIGHT =
-  "linear-gradient(135deg, rgba(37,99,235,0.45), transparent 45%, rgba(20,184,166,0.35))";
+const FROM_PRICE = Math.min(...SHOWROOM_FAMILIES.map((f) => f.from));
+
+/* Datos reales del Showroom, no inventados. */
+const STATS = [
+  { value: String(SHOWROOM_TOTAL_PACKAGES), label: "paquetes con demo" },
+  { value: String(SHOWROOM_FAMILIES.length), label: "familias de soluciones" },
+  { value: formatAmount(FROM_PRICE), label: "precio de entrada + IVA" },
+];
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[var(--color-navy)] lg:min-h-[640px] xl:min-h-[680px] flex">
-      {/* ---------- Fondo tecnológico (profundidad, muy sutil) ---------- */}
-      <div className="pointer-events-none absolute inset-0 tech-grid" />
+    <section className="relative overflow-hidden bg-[var(--color-navy)] lg:min-h-[760px] xl:min-h-[820px] flex flex-col">
+      {/* Imagen a sangre: ocupa el fondo completo en desktop y se funde con el navy a la izquierda */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="absolute right-[-6%] top-1/2 -translate-y-[52%] hidden lg:block w-[60%] aspect-[3/2]"
         style={{
-          background:
-            "radial-gradient(50% 60% at 12% 18%, rgba(37,99,235,0.28), transparent 70%), radial-gradient(40% 50% at 92% 88%, rgba(20,184,166,0.2), transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse 72% 72% at 55% 50%, #000 45%, transparent 100%)",
+          maskImage: "radial-gradient(ellipse 72% 72% at 55% 50%, #000 45%, transparent 100%)",
         }}
-      />
-      {/* Línea geométrica diagonal, casi imperceptible */}
-      <div
-        className="pointer-events-none absolute -top-40 left-[46%] h-[160%] w-px rotate-[18deg] opacity-40"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent, rgba(20,184,166,0.5) 40%, rgba(37,99,235,0.4) 60%, transparent)",
-        }}
-      />
-      {/* Puntos luminosos mínimos */}
-      <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
-        <span className="absolute left-[8%] top-[22%] w-1 h-1 rounded-full bg-[var(--color-teal)]/70 shadow-[0_0_12px_2px_rgba(20,184,166,0.5)]" />
-        <span className="absolute left-[40%] top-[12%] w-1.5 h-1.5 rounded-full bg-[var(--color-blue)]/70 shadow-[0_0_14px_3px_rgba(37,99,235,0.5)]" />
-        <span className="absolute left-[30%] bottom-[16%] w-1 h-1 rounded-full bg-white/50 shadow-[0_0_10px_2px_rgba(255,255,255,0.35)]" />
-      </div>
-
-      {/* ---------- Fotografía desktop: avanza hacia el centro ----------
-          Ocupa el 62% derecho de la sección y se funde con el navy por la
-          izquierda y por la base, sin división dura. object-position hacia
-          la derecha para mostrar al equipo y el skyline. */}
-      <div className="absolute inset-y-0 right-0 hidden lg:block w-[58%] xl:w-[62%]">
+      >
         <Image
-          src="/images/heroes/hero-inicio.webp"
+          src="/images/home/hero-home.webp"
           alt={HERO_ALT}
           fill
-          sizes="(min-width: 1280px) 62vw, (min-width: 1024px) 58vw, 100vw"
-          className="object-cover object-[72%_center]"
+          sizes="62vw"
+          className="object-cover"
           loading="eager"
           fetchPriority="high"
         />
-        {/* Fusión hacia el navy: izquierda (ancha) + base + techo */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, #0b1f44 0%, rgba(11,31,68,0.96) 18%, rgba(11,31,68,0.7) 34%, rgba(11,31,68,0.25) 52%, transparent 72%)",
+              "linear-gradient(90deg, #0b1f44 0%, rgba(11,31,68,0.85) 14%, rgba(11,31,68,0.4) 34%, rgba(11,31,68,0.05) 55%)",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-navy)]/45 via-transparent to-transparent" />
-        <div className="absolute inset-0 mix-blend-overlay opacity-80" style={{ background: BRAND_LIGHT }} />
-        {/* Tarjetas glass sobre la mitad derecha de la foto */}
-        <HeroCards className="left-[30%]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[var(--color-navy)] to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[var(--color-navy)]/60 to-transparent" />
       </div>
+      <div className="pointer-events-none absolute inset-0 tech-grid opacity-60" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(45% 55% at 8% 20%, rgba(37,99,235,0.3), transparent 70%), radial-gradient(35% 45% at 70% 100%, rgba(20,184,166,0.22), transparent 70%)",
+        }}
+      />
 
-      {/* ---------- Contenido ---------- */}
-      <div className="relative w-full max-w-[1200px] mx-auto px-5 sm:px-8 grid lg:grid-cols-[54%_46%] items-center pt-14 pb-10 sm:pt-20 sm:pb-12 lg:py-24">
-        <div className="relative z-10 max-w-[600px]">
+      <div className="relative flex-1 w-full max-w-[1240px] mx-auto px-5 sm:px-8 flex items-center pt-16 pb-10 sm:pt-24 lg:pt-28 lg:pb-12">
+        <div className="relative z-10 max-w-[640px]">
           <span
-            className="hero-enter inline-flex items-center gap-2.5 text-[13px] font-bold uppercase tracking-[0.16em] text-[var(--color-teal)] mb-5"
+            className="hero-enter inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] backdrop-blur px-4 py-1.5 text-[12.5px] font-semibold uppercase tracking-[0.16em] text-[var(--color-teal)] mb-7"
             style={{ "--d": "0ms" }}
           >
-            <span className="w-7 h-px bg-[var(--color-teal)]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-teal)] shadow-[0_0_10px_2px_rgba(20,184,166,0.7)]" />
             Soluciones digitales para empresas
           </span>
           <h1
-            className="hero-enter text-[2.75rem] leading-[1.06] sm:text-[3.4rem] lg:text-[3.6rem] xl:text-[4.15rem] font-bold tracking-[-0.02em] text-white mb-6 text-balance"
+            className="hero-enter text-[2.9rem] leading-[1.04] sm:text-[4rem] xl:text-[4.75rem] font-bold tracking-[-0.03em] text-white mb-7 text-balance"
             style={{ "--d": "90ms" }}
           >
-            Tecnología que conecta, simplifica y hace crecer tu negocio.
+            Creamos páginas web y soluciones digitales{" "}
+            <span className="bg-gradient-to-r from-[#5b93ff] to-[var(--color-teal)] bg-clip-text text-transparent">
+              para tu negocio.
+            </span>
           </h1>
           <p
-            className="hero-enter text-[17px] sm:text-lg lg:text-[19px] text-white/72 leading-[1.65] mb-9 max-w-[540px]"
+            className="hero-enter text-[17px] sm:text-[19px] text-white/75 leading-[1.65] mb-10 max-w-[540px]"
             style={{ "--d": "180ms" }}
           >
-            Diseñamos y desarrollamos sitios web, e-commerce, bases de datos, portales y
-            soluciones digitales a medida para empresas que quieren avanzar.
+            Diseñamos sitios web, tiendas online y sistemas personalizados. Conoce nuestros
+            ejemplos, revisa los precios y descubre qué podemos crear para ti.
           </p>
           <div
-            className="hero-enter flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3.5 mb-10"
+            className="hero-enter flex flex-col sm:flex-row sm:flex-wrap gap-4"
             style={{ "--d": "270ms" }}
           >
-            <Button href="#contacto" variant="accent" size="xl">
-              Cuéntanos tu proyecto
+            <Button href={SHOWROOM_HREF} plain variant="accent" size="xl" className="shadow-xl shadow-teal-500/30">
+              Ver ejemplos y precios
+              <IconArrowRight className="w-4 h-4" />
             </Button>
-            <Button href="#soluciones" variant="on-dark-outline" size="xl">
-              Ver soluciones
+            <Button href="#contacto" variant="on-dark-outline" size="xl">
+              Solicitar cotización
             </Button>
-          </div>
-
-          <ul className="hero-enter flex flex-wrap items-center gap-x-8 gap-y-3" style={{ "--d": "360ms" }}>
-            {HIGHLIGHTS.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-[15px] text-white/85">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-teal)]/20 text-[var(--color-teal)] flex items-center justify-center">
-                  <IconCheck className="w-3.5 h-3.5" />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Mobile / tablet: la foto se apila bajo el texto, con el mismo
-            tratamiento y las tarjetas glass encima. */}
-        <div className="hero-enter lg:hidden relative mt-12 sm:mt-14" style={{ "--d": "420ms" }}>
-          <div className="absolute -inset-6 rounded-[2rem] bg-[var(--color-blue)]/20 blur-3xl" />
-          <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl shadow-black/40">
-            <Image
-              src="/images/heroes/hero-inicio.webp"
-              alt={HERO_ALT}
-              fill
-              sizes="(min-width: 640px) 90vw, 100vw"
-              className="object-cover object-[70%_center]"
-              loading="eager"
-              fetchPriority="high"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/70 via-transparent to-[var(--color-navy)]/20" />
-            <div className="absolute inset-0 mix-blend-overlay opacity-80" style={{ background: BRAND_LIGHT }} />
-            <HeroCards compact />
           </div>
         </div>
       </div>
 
-      {/* Transición suave hacia la sección blanca siguiente */}
+      {/* Imagen en móvil/tablet, bajo el texto */}
+      <div className="lg:hidden relative px-5 sm:px-8 pb-10">
+        <div className="relative aspect-[3/2] rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-2xl shadow-black/50">
+          <Image
+            src="/images/home/hero-home.webp"
+            alt={HERO_ALT}
+            fill
+            sizes="92vw"
+            className="object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </div>
+      </div>
+
+      {/* Franja de datos reales del Showroom */}
+      <div className="relative w-full max-w-[1240px] mx-auto px-5 sm:px-8 pb-8 lg:pb-12">
+        <dl className="glass-card rounded-2xl grid grid-cols-3 divide-x divide-white/10 max-w-[760px]">
+          {STATS.map((s) => (
+            <div key={s.label} className="px-4 sm:px-7 py-4 sm:py-5">
+              <dt className="sr-only">{s.label}</dt>
+              <dd>
+                <span className="block text-xl sm:text-[1.65rem] font-bold text-white tracking-[-0.01em]">{s.value}</span>
+                <span className="block text-[12px] sm:text-[13px] text-white/65 mt-0.5 leading-snug">{s.label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
       <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--color-teal)]/40 to-transparent" />
     </section>
   );

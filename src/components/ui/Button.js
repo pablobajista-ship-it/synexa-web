@@ -26,6 +26,7 @@ const base =
 export default function Button({
   as,
   href,
+  plain = false,
   variant = "primary",
   size = "md",
   className = "",
@@ -33,6 +34,15 @@ export default function Button({
   ...props
 }) {
   const classes = `${base} ${SIZES[size]} ${VARIANTS[variant]} ${className}`;
+
+  /* plain: <a> normal (navegación completa), para rutas servidas por el Showroom. */
+  if (href && plain) {
+    return (
+      <a href={href} className={classes} {...props}>
+        {children}
+      </a>
+    );
+  }
 
   if (href) {
     return (

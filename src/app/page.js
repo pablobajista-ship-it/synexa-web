@@ -1,15 +1,12 @@
 import { auth } from "@/auth";
 import { isPortalEnabled } from "@/lib/portal";
+import { CONTACT_PRIMARY } from "@/data/contact";
 import SiteHeader from "@/components/marketing/SiteHeader";
 import Hero from "@/components/marketing/Hero";
-import ServicesGrid from "@/components/marketing/ServicesGrid";
-import ValueProps from "@/components/marketing/ValueProps";
-import HomeAppsTeaser from "@/components/marketing/HomeAppsTeaser";
-import HomePricingTeaser from "@/components/marketing/HomePricingTeaser";
-import ProcessSteps from"@/components/marketing/ProcessSteps";
-import UseCasesGrid from "@/components/marketing/UseCasesGrid";
-import TechStack from "@/components/marketing/TechStack";
-import DarkBrandBlock from "@/components/marketing/DarkBrandBlock";
+import HomeSolutions from "@/components/marketing/HomeSolutions";
+import HomeDemos from "@/components/marketing/HomeDemos";
+import HomeWhy from "@/components/marketing/HomeWhy";
+import HomeProcess from "@/components/marketing/HomeProcess";
 import CtaSection from "@/components/marketing/CtaSection";
 import SiteFooter from "@/components/marketing/SiteFooter";
 
@@ -26,15 +23,16 @@ export default async function Home() {
       />
       <main>
         <Hero />
-        <ServicesGrid />
-        <ValueProps />
-        <HomeAppsTeaser />
-        <HomePricingTeaser />
-        <ProcessSteps />
-        <UseCasesGrid />
-        <TechStack />
-        <DarkBrandBlock />
-        <CtaSection />
+        <HomeSolutions />
+        <HomeDemos />
+        <HomeWhy />
+        <HomeProcess />
+        <CtaSection
+          title="¿Tienes una idea para tu negocio?"
+          description="Cuéntanos qué necesitas. Te ayudaremos a encontrar una solución digital adecuada para tu proyecto."
+          primaryAction={CONTACT_PRIMARY}
+          secondaryAction={{ href: "/servicios-y-precios", label: "Ver servicios y precios" }}
+        />
       </main>
       <SiteFooter />
     </div>
