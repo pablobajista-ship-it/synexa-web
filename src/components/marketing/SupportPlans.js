@@ -105,7 +105,7 @@ export default function SupportPlans({ plans, hourly }) {
 
                   <div className="mt-auto">
                     <Button
-                      href="#contacto"
+                      href="/contacto"
                       variant={plan.recommended ? "accent" : "secondary"}
                       size="md"
                       className="w-full"

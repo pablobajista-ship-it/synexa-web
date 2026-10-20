@@ -127,7 +127,7 @@ function PortalComingSoon() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
-          <Button href="mailto:hola@synexa.com" variant="accent" size="lg">
+          <Button href="/contacto" variant="accent" size="lg">
             Escribir a SYNEXA
           </Button>
           <Button href="/" variant="on-dark-outline" size="lg">

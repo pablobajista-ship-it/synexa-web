@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 import Container from "@/components/ui/Container";
 import { isPortalEnabled } from "@/lib/portal";
+import { CONTACT_EMAIL, HAS_WHATSAPP, WHATSAPP_HREF } from "@/data/contact";
 
 const COLUMNS = [
   {
@@ -20,8 +21,8 @@ const COLUMNS = [
       { href: "/servicios-y-precios", label: "Servicios y Precios" },
       { href: "/servicios-y-precios#infraestructura", label: "Infraestructura" },
       { href: "/servicios-y-precios#soporte", label: "Planes de Soporte" },
-      { href: "/#nosotros", label: "Nosotros" },
-      { href: "#contacto", label: "Contacto" },
+      { href: "/nosotros", label: "Nosotros" },
+      { href: "/contacto", label: "Contacto" },
       { href: "/login", label: "Portal de Clientes", portal: true },
     ],
   },
@@ -75,14 +76,27 @@ export default function SiteFooter() {
           </p>
           <ul className="space-y-3 text-[15px] text-white/70">
             <li>
-              <a
-                href="mailto:hola@synexa.com"
+              <Link
+                href="/contacto"
                 className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded"
               >
-                hola@synexa.com
-              </a>
+                Formulario de contacto
+              </Link>
             </li>
-            <li>+56 9 0000 0000</li>
+            {CONTACT_EMAIL ? (
+              <li>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded">
+                  {CONTACT_EMAIL}
+                </a>
+              </li>
+            ) : null}
+            {HAS_WHATSAPP ? (
+              <li>
+                <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded">
+                  WhatsApp
+                </a>
+              </li>
+            ) : null}
           </ul>
           <p className="mt-6 text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--color-teal)]">
             Ideas + Tecnología + Resultados
@@ -93,7 +107,8 @@ export default function SiteFooter() {
       <div className="border-t border-white/10">
         <Container className="py-7 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-white/45 text-[13px]">
-            © {new Date().getFullYear()} SYNEXA — Soluciones Web para Empresas.
+            © {new Date().getFullYear()} SYNEXA — Soluciones Web para Empresas.{" "}
+            <Link href="/privacidad" className="underline underline-offset-2 hover:text-white">Privacidad</Link>
           </p>
           <p className="text-white/45 text-[13px] uppercase tracking-[0.12em]">
             Un mundo más conectado para tu negocio

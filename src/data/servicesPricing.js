@@ -122,7 +122,7 @@ export const SERVICES = [
     launchPeriod: "simple",
     featured: false,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "sitio-web-pyme",
@@ -151,7 +151,7 @@ export const SERVICES = [
     launchPeriod: "simple",
     featured: false,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "sitio-web-corporativo",
@@ -179,7 +179,7 @@ export const SERVICES = [
     launchPeriod: "corporativo",
     featured: true,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "sitio-corporativo-avanzado",
@@ -198,7 +198,7 @@ export const SERVICES = [
     launchPeriod: "corporativo",
     featured: false,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "catalogo-digital",
@@ -217,7 +217,7 @@ export const SERVICES = [
     launchPeriod: "corporativo",
     featured: false,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "rediseno-modernizacion",
@@ -236,7 +236,7 @@ export const SERVICES = [
     launchPeriod: "simple",
     featured: false,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
 
   // ------------------------------- Comercio y Procesos
@@ -264,7 +264,7 @@ export const SERVICES = [
     launchPeriod: "corporativo",
     featured: true,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "ecommerce-profesional",
@@ -283,7 +283,7 @@ export const SERVICES = [
     launchPeriod: "corporativo",
     featured: false,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "sistema-reservas",
@@ -308,7 +308,7 @@ export const SERVICES = [
     launchPeriod: "sistemas",
     featured: false,
     customQuote: false,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "portal-de-clientes",
@@ -334,7 +334,7 @@ export const SERVICES = [
     launchPeriod: "sistemas",
     featured: false,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
 
   // ------------------------------- Sistemas y Plataformas
@@ -361,7 +361,7 @@ export const SERVICES = [
     launchPeriod: "sistemas",
     featured: false,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "plataforma-empresarial",
@@ -386,7 +386,7 @@ export const SERVICES = [
     launchPeriod: "sistemas",
     featured: false,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "integracion-api",
@@ -405,7 +405,7 @@ export const SERVICES = [
     launchPeriod: "sistemas",
     featured: false,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
   {
     id: "sistema-web-a-medida",
@@ -424,7 +424,7 @@ export const SERVICES = [
     launchPeriod: "sistemas",
     featured: true,
     customQuote: true,
-    cta: { label: "Solicitar cotización", href: "#contacto" },
+    cta: { label: "Solicitar cotización", href: "/contacto" },
   },
 ];
 

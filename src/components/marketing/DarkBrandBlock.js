@@ -34,7 +34,7 @@ export default function DarkBrandBlock() {
           <p className="text-white/72 text-[17px] sm:text-lg leading-[1.7] max-w-[620px]">
             Cuéntanos qué necesita tu negocio y diseñaremos contigo la solución adecuada.
           </p>
-          <Button href="#contacto" variant="accent" size="xl" className="mt-2">
+          <Button href="/contacto" variant="accent" size="xl" className="mt-2">
             Conversemos
           </Button>
         </Container>

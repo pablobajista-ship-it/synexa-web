@@ -177,3 +177,18 @@ export async function notifyPasswordReset(user, resetUrl) {
     cta: { label: "Crear nueva contraseña", url: resetUrl },
   });
 }
+
+export async function notifyInquiryToAdmin(inquiry, serviceLabel) {
+  await send("inquiry_admin", {
+    to: adminNotifyEmail(),
+    replyTo: inquiry.email,
+    subject: `Nueva consulta comercial: ${serviceLabel}`,
+    title: "Nueva consulta comercial",
+    lines: [
+      `${inquiry.name} <${inquiry.email}>${inquiry.company ? ` · ${inquiry.company}` : ""}${inquiry.phone ? ` · ${inquiry.phone}` : ""}`,
+      `Solución: ${serviceLabel}${inquiry.source ? ` · Origen: ${inquiry.source}` : ""}`,
+      excerpt(inquiry.message, 800),
+    ],
+    cta: { label: "Abrir en Consultas comerciales", url: `${appUrl()}/admin/consultas/${inquiry.id}` },
+  });
+}

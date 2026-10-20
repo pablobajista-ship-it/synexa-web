@@ -82,7 +82,7 @@ export default function AppPricingBlock({ pricing }) {
 
         <Reveal delay={90}>
           <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-4">
-            <Button href="#contacto" variant="primary" size="xl">
+            <Button href="/contacto" variant="primary" size="xl">
               Solicitar evaluación
             </Button>
           </div>

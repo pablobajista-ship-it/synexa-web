@@ -23,6 +23,7 @@ const IMG = "/images/aplicaciones";
 export const APP_EXAMPLES = [
   {
     id: "minimarket",
+    service: "catalogo",
     group: "vender",
     sector: "Minimarket",
     title: "Presenta tus productos y facilita los pedidos",
@@ -35,6 +36,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "bicicletas",
+    service: "catalogo",
     group: "vender",
     sector: "Tienda de bicicletas",
     title: "Convierte tu catálogo en una vitrina digital",
@@ -47,6 +49,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "veterinarias",
+    service: "reservas",
     group: "reservas",
     sector: "Veterinarias",
     title: "Organiza la atención de tus pacientes y sus dueños",
@@ -59,6 +62,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "clinicas",
+    service: "reservas",
     group: "reservas",
     sector: "Clínicas y centros profesionales",
     title: "Facilita las reservas y presenta tus servicios",
@@ -71,6 +75,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "estetica",
+    service: "reservas",
     group: "reservas",
     sector: "Peluquerías y centros de estética",
     title: "Permite que tus clientes soliciten o reserven una hora",
@@ -83,6 +88,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "talleres",
+    service: "aplicacion",
     group: "gestion",
     sector: "Talleres automotrices",
     title: "Organiza reparaciones y atención al cliente",
@@ -95,6 +101,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "tienda-online",
+    service: "tienda-online",
     group: "vender",
     sector: "Tiendas online",
     title: "Vende tus productos por internet",
@@ -108,6 +115,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "servicios-tecnicos",
+    service: "aplicacion",
     group: "gestion",
     sector: "Empresas de servicios técnicos",
     title: "Administra solicitudes y trabajos en terreno",
@@ -120,6 +128,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "empresas",
+    service: "aplicacion",
     group: "gestion",
     sector: "Empresas y oficinas",
     title: "Centraliza clientes y procesos administrativos",
@@ -132,6 +141,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "portal-clientes",
+    service: "portal-clientes",
     group: "gestion",
     sector: "Portal de clientes",
     title: "Un espacio privado para cada cliente",
@@ -145,6 +155,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "inventario",
+    service: "personalizado",
     group: "gestion",
     sector: "Sistemas internos de gestión",
     title: "Ordena los procesos propios de tu empresa",
@@ -158,6 +169,7 @@ export const APP_EXAMPLES = [
   },
   {
     id: "cotizaciones",
+    service: "aplicacion",
     group: "gestion",
     sector: "Cotizaciones y gestión comercial",
     title: "Del borrador al documento enviado, con seguimiento",

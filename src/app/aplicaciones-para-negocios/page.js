@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { isPortalEnabled } from "@/lib/portal";
-import { CONTACT_PRIMARY } from "@/data/contact";
+import { CONTACT_PAGE } from "@/data/contact";
 import SiteHeader from "@/components/marketing/SiteHeader";
 import SiteFooter from "@/components/marketing/SiteFooter";
 import AppsHero from "@/components/marketing/AppsHero";
@@ -31,7 +31,7 @@ export default async function AplicacionesParaNegociosPage() {
       />
 
       <main>
-        <AppsHero contactHref="#contacto" />
+        <AppsHero contactHref="/contacto" />
         <AppsCapabilities />
 
         <section id="ejemplos" className="py-12 sm:py-14 lg:py-16 bg-[var(--color-surface-muted)] scroll-mt-20">
@@ -50,7 +50,7 @@ export default async function AplicacionesParaNegociosPage() {
                 servicio contratado.
               </p>
             </Reveal>
-            <AppExamplesGallery contactHref="#contacto" />
+            <AppExamplesGallery />
           </Container>
         </section>
 
@@ -60,7 +60,7 @@ export default async function AplicacionesParaNegociosPage() {
           eyebrow="Hablemos de tu negocio"
           title="Cada negocio es diferente. Tu solución también puede serlo."
           description="Los ejemplos que has visto muestran algunas de las posibilidades. Podemos ayudarte a identificar qué funcionalidades necesita realmente tu negocio."
-          primaryAction={{ href: CONTACT_PRIMARY.href, label: "Conversemos sobre tu proyecto" }}
+          primaryAction={{ href: CONTACT_PAGE, label: "Conversemos sobre tu proyecto" }}
           secondaryAction={{ href: "/servicios-y-precios", label: "Ver servicios y precios" }}
         />
       </main>

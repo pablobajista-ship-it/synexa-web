@@ -49,6 +49,23 @@ export function resumenCotizacion(p: Paquete): string {
   return lineas.join("\n");
 }
 
+/**
+ * Opción del formulario de /contacto (sitio principal) según la línea del paquete.
+ * "/contacto" es del sitio principal, fuera de esta SPA: se enlaza con <a>, no con <Link>.
+ */
+const SERVICIO_CONTACTO: Record<string, string> = {
+  landing: "pagina-web",
+  "sitios-web": "pagina-web",
+  rediseno: "modernizar",
+  catalogos: "catalogo",
+  "comercio-electronico": "tienda-online",
+  "radio-digital": "personalizado",
+  agenda: "reservas",
+  "portal-clientes": "portal-clientes",
+  "datos-procesos": "aplicacion",
+  integraciones: "personalizado",
+};
+
 export function FichaPaquete() {
   const { paqueteId = "" } = useParams();
   const location = useLocation();
@@ -157,14 +174,20 @@ export function FichaPaquete() {
           <div className="rounded-2xl bg-surface p-6 ring-1 ring-line">
             <h2 className="text-lg font-bold">Solicitar cotización</h2>
             <p className="mt-2 text-sm text-muted">
-              Copia este resumen referencial y compártelo con SYNEXA. En esta versión local no se envían ni almacenan datos.
+              Pide información directamente a SYNEXA o copia este resumen referencial para compartirlo.
             </p>
             <dl className="mt-4 space-y-2 border-y border-line py-4 text-sm">
               <div className="flex justify-between"><dt className="text-muted">Desarrollo</dt><dd className="font-semibold">{formatoCLP(paquete.precio)}</dd></div>
               <div className="flex justify-between"><dt className="text-muted">Infraestructura</dt><dd className="text-muted">Se informa antes</dd></div>
               <div className="flex justify-between"><dt className="text-muted">Soporte mensual</dt><dd className="text-muted">Opcional</dd></div>
             </dl>
-            <button type="button" onClick={copiar} className="mt-4 w-full rounded-lg bg-blue px-4 py-3 text-sm font-semibold text-white hover:bg-blue-dark">
+            <a
+              href={`/contacto?servicio=${SERVICIO_CONTACTO[paquete.linea] ?? "asesoria"}&origen=paquete-${paquete.id}`}
+              className="mt-4 block w-full rounded-lg bg-blue px-4 py-3 text-center text-sm font-semibold text-white hover:bg-blue-dark"
+            >
+              Solicitar información
+            </a>
+            <button type="button" onClick={copiar} className="mt-3 w-full rounded-lg px-4 py-3 text-sm font-semibold ring-1 ring-inset ring-line hover:bg-white">
               Copiar resumen de cotización
             </button>
             <Link to={`/servicios-y-precios/arma-tu-solucion?paquete=${paquete.id}`} className="mt-3 block rounded-lg px-4 py-3 text-center text-sm font-semibold ring-1 ring-inset ring-line hover:bg-white">Armar con este paquete</Link>

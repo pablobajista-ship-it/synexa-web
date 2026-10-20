@@ -15,6 +15,7 @@ const CLIENT_LINKS = [
 const ADMIN_LINKS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/tickets", label: "Tickets" },
+  { href: "/admin/consultas", label: "Consultas" },
   { href: "/admin/clientes", label: "Clientes" },
   { href: "/admin/estadisticas", label: "Estadísticas" },
   { href: "/admin/configuracion", label: "Configuración" },

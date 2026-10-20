@@ -99,7 +99,7 @@ export default async function ServiciosYPreciosPage() {
           description="Desde una presencia web profesional hasta plataformas y sistemas personalizados. Elige una solución inicial o cuéntanos qué necesita tu empresa y diseñaremos una propuesta a medida."
           actions={
             <>
-              <Button href="#contacto" variant="accent" size="xl">
+              <Button href="/contacto" variant="accent" size="xl">
                 Cuéntanos tu proyecto
               </Button>
               <Button href="#servicios" variant="on-dark-outline" size="xl">
@@ -198,7 +198,7 @@ export default async function ServiciosYPreciosPage() {
         <CustomProjectBlock
           title="¿No sabes qué infraestructura necesita tu proyecto?"
           text="No necesitas elegir proveedores ni conocer los detalles técnicos. Nosotros te indicaremos qué necesita tu solución y cuánto costará mantenerla."
-          cta={{ label: "Hablar con SYNEXA", href: "#contacto" }}
+          cta={{ label: "Hablar con SYNEXA", href: "/contacto" }}
         />
 
         {/* ---------- Continuidad y soporte ---------- */}
@@ -218,8 +218,8 @@ export default async function ServiciosYPreciosPage() {
         <CtaSection
           title="¿No sabes qué servicio necesitas?"
           description="Cuéntanos qué quieres resolver y te ayudaremos a identificar la solución adecuada para tu negocio."
-          primaryAction={{ href: "mailto:hola@synexa.com", label: "Cuéntanos tu proyecto" }}
-          secondaryAction={{ href: "mailto:hola@synexa.com", label: "Hablar con SYNEXA" }}
+          primaryAction={{ href: "/contacto", label: "Cuéntanos tu proyecto" }}
+          secondaryAction={{ href: "/contacto", label: "Hablar con SYNEXA" }}
         />
       </main>
 

@@ -13,7 +13,7 @@ export default function CtaSection({
   eyebrow,
   title = "Conversemos sobre tu proyecto",
   description = "Cuéntanos qué quieres lograr, qué problema necesitas resolver o qué idea tienes en mente. Podemos ayudarte a convertirla en una solución digital.",
-  primaryAction = { href: "mailto:hola@synexa.com", label: "Hablemos" },
+  primaryAction = { href: "/contacto", label: "Hablemos" },
   secondaryAction = { href: "/login", label: "Portal de Clientes" },
 }) {
   /* Si el portal está oculto no se renderizan los botones que llevan a él;

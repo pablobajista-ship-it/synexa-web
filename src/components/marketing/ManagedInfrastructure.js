@@ -192,7 +192,7 @@ export default function ManagedInfrastructure({
 
                 <div className="mt-auto">
                   <Button
-                    href="#contacto"
+                    href="/contacto"
                     variant={plan.recommended ? "accent" : "secondary"}
                     size="md"
                     className="w-full"

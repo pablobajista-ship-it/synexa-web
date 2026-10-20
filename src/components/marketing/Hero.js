@@ -92,7 +92,7 @@ export default function Hero() {
               Ver ejemplos y precios
               <IconArrowRight className="w-4 h-4" />
             </Button>
-            <Button href="#contacto" variant="on-dark-outline" size="xl">
+            <Button href="/contacto" variant="on-dark-outline" size="xl">
               Solicitar cotización
             </Button>
           </div>

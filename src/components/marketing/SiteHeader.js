@@ -10,7 +10,7 @@ import Container from "@/components/ui/Container";
  * El header se usa en la Home y en las páginas interiores.
  * - Los enlaces a secciones de la Home van con "/#..." para que funcionen
  *   desde cualquier ruta.
- * - "#contacto" se deja sin prefijo a propósito: todas las páginas del sitio
+ * - "Contacto" y "Hablemos" llevan a /contacto (formulario comercial). Antes eran "#contacto":
  *   terminan con un <CtaSection id="contacto">, así el enlace lleva al CTA de
  *   la página en la que estás sin sacarte de ella.
  */
@@ -18,8 +18,8 @@ const NAV_LINKS = [
   { href: "/#soluciones", label: "Soluciones" },
   { href: "/aplicaciones-para-negocios", label: "Aplicaciones" },
   { href: "/servicios-y-precios", label: "Servicios y Precios" },
-  { href: "/#nosotros", label: "Nosotros" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 export default function SiteHeader({ isAuthenticated, dashboardHref, portalEnabled = true }) {
@@ -54,7 +54,7 @@ export default function SiteHeader({ isAuthenticated, dashboardHref, portalEnabl
               Ingresar
             </Button>
           ) : null}
-          <Button href="#contacto" variant="primary" size="md">
+          <Button href="/contacto" variant="primary" size="md">
             Hablemos
           </Button>
         </div>
@@ -96,7 +96,7 @@ export default function SiteHeader({ isAuthenticated, dashboardHref, portalEnabl
                   Ingresar
                 </Button>
               ) : null}
-              <Button href="#contacto" variant="primary">
+              <Button href="/contacto" variant="primary">
                 Hablemos
               </Button>
             </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import AppIcon from "@/components/marketing/appIcons";
 import { IconArrowRight } from "@/components/marketing/icons";
+import { contactHref } from "@/data/contact";
 import { APP_EXAMPLES, APP_GROUPS, FIRST_VISIBLE } from "@/data/appExamples";
 
 function MiniFlow({ steps }) {
@@ -19,7 +20,7 @@ function MiniFlow({ steps }) {
   );
 }
 
-function ExampleCard({ app, contactHref }) {
+function ExampleCard({ app }) {
   return (
     <article className="card-hover h-full flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border)]/80 bg-white shadow-[0_1px_2px_rgba(11,31,68,0.04)] hover:border-[var(--color-teal)]/35">
       <div className="relative aspect-[16/10] bg-[var(--color-navy)]">
@@ -69,7 +70,7 @@ function ExampleCard({ app, contactHref }) {
           ))}
         </ul>
         <a
-          href={contactHref}
+          href={contactHref({ service: app.service, source: `aplicaciones-${app.id}` })}
           className="mt-auto inline-flex items-center gap-2 text-[14.5px] font-semibold text-[var(--color-blue)] hover:text-[var(--color-blue-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded"
         >
           Consultar una solución parecida
@@ -80,7 +81,7 @@ function ExampleCard({ app, contactHref }) {
   );
 }
 
-export default function AppExamplesGallery({ contactHref = "#contacto" }) {
+export default function AppExamplesGallery() {
   const [group, setGroup] = useState("todos");
   const [expanded, setExpanded] = useState(false);
 
@@ -111,7 +112,7 @@ export default function AppExamplesGallery({ contactHref = "#contacto" }) {
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6" aria-live="polite">
         {visible.map((app) => (
           <li key={app.id}>
-            <ExampleCard app={app} contactHref={contactHref} />
+            <ExampleCard app={app} />
           </li>
         ))}
       </ul>

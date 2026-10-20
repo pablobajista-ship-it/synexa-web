@@ -14,7 +14,7 @@ export default function CustomProjectBlock({
   title = "¿Tu proyecto no encaja en un plan?",
   text = "Cada empresa trabaja de manera distinta. Podemos diseñar una solución completamente adaptada a tus procesos, usuarios y objetivos.",
   secondaryText,
-  cta = { label: "Solicitar cotización", href: "#contacto" },
+  cta = { label: "Solicitar cotización", href: "/contacto" },
 }) {
   return (
     <section className="relative overflow-hidden bg-[var(--color-navy)] section-pad">

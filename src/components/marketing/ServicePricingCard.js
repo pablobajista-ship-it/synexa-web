@@ -138,7 +138,7 @@ export default function ServicePricingCard({ service }) {
 
       <div className="mt-6">
         <Button
-          href={cta?.href ?? "#contacto"}
+          href={cta?.href ?? "/contacto"}
           variant={featured ? "accent" : "primary"}
           size="lg"
           className="w-full"

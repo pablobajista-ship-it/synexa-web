@@ -74,7 +74,7 @@ export default function ServicesGrid() {
                   {text}
                 </p>
                 <a
-                  href="#contacto"
+                  href="/contacto"
                   className="mt-auto inline-flex items-center gap-2 text-[14px] font-bold text-[var(--color-blue)] hover:text-[var(--color-blue-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded"
                 >
                   <span>

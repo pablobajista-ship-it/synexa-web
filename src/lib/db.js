@@ -329,3 +329,109 @@ export async function findAttachmentById(id) {
   const [row] = await sql`SELECT * FROM attachments WHERE id = ${id}`;
   return plain(row);
 }
+
+// ---------- Consultas comerciales (formulario de /contacto) ----------
+// Prospectos, separados de los tickets de soporte. Ver 0002_contact_inquiries.sql.
+
+export async function countRecentInquiriesByIp(ipHash, minutes) {
+  const sql = await db();
+  const [row] = await sql`
+    SELECT COUNT(*)::int AS n FROM contact_inquiries
+    WHERE ip_hash = ${ipHash} AND created_at > now() - make_interval(mins => ${minutes})
+  `;
+  return row.n;
+}
+
+export async function countRecentInquiriesByEmail(email, minutes) {
+  const sql = await db();
+  const [row] = await sql`
+    SELECT COUNT(*)::int AS n FROM contact_inquiries
+    WHERE email = ${email} AND created_at > now() - make_interval(mins => ${minutes})
+  `;
+  return row.n;
+}
+
+export async function createInquiry(data) {
+  const sql = await db();
+  return plain(
+    await sql.begin(async (tx) => {
+      const [row] = await tx`
+        INSERT INTO contact_inquiries (name, email, company, phone, service, message, source, consent_at, ip_hash)
+        VALUES (${data.name}, ${data.email}, ${data.company || null}, ${data.phone || null},
+                ${data.service}, ${data.message}, ${data.source || null}, now(), ${data.ipHash ?? null})
+        RETURNING *
+      `;
+      await tx`
+        INSERT INTO contact_inquiry_events (inquiry_id, status, note)
+        VALUES (${row.id}, 'NUEVA', 'Consulta recibida desde el formulario web.')
+      `;
+      return row;
+    })
+  );
+}
+
+export async function listInquiries({ status } = {}) {
+  const sql = await db();
+  const rows = await sql`
+    SELECT * FROM contact_inquiries
+    ${status ? sql`WHERE status = ${status}` : sql``}
+    ORDER BY created_at DESC LIMIT 500
+  `;
+  return plainAll(rows);
+}
+
+export async function inquiryStatusCounts() {
+  const sql = await db();
+  const rows = await sql`SELECT status, COUNT(*)::int AS n FROM contact_inquiries GROUP BY status`;
+  return Object.fromEntries(rows.map((r) => [r.status, r.n]));
+}
+
+export async function findInquiryById(id) {
+  const sql = await db();
+  const [row] = await sql`SELECT * FROM contact_inquiries WHERE id = ${id}`;
+  return plain(row);
+}
+
+export async function listInquiryEvents(inquiryId) {
+  const sql = await db();
+  const rows = await sql`
+    SELECT e.*, u.name AS user_name FROM contact_inquiry_events e
+    LEFT JOIN users u ON u.id = e.user_id
+    WHERE e.inquiry_id = ${inquiryId} ORDER BY e.created_at ASC
+  `;
+  return plainAll(rows);
+}
+
+export async function updateInquiryStatus(id, status, userId, note) {
+  const sql = await db();
+  return plain(
+    await sql.begin(async (tx) => {
+      const [row] = await tx`
+        UPDATE contact_inquiries SET status = ${status}, updated_at = now() WHERE id = ${id} RETURNING *
+      `;
+      if (!row) return undefined;
+      await tx`
+        INSERT INTO contact_inquiry_events (inquiry_id, status, note, user_id)
+        VALUES (${id}, ${status}, ${note || null}, ${userId ?? null})
+      `;
+      return row;
+    })
+  );
+}
+
+export async function deleteInquiry(id) {
+  const sql = await db();
+  const rows = await sql`DELETE FROM contact_inquiries WHERE id = ${id} RETURNING id`;
+  return rows.length > 0;
+}
+
+/** Retención: borra consultas CERRADAS con más de `months` meses. Devuelve cuántas. */
+export async function purgeClosedInquiries(months) {
+  const sql = await db();
+  const rows = await sql`
+    DELETE FROM contact_inquiries
+    WHERE status = 'CERRADA' AND updated_at < now() - make_interval(months => ${months})
+    RETURNING id
+  `;
+  return rows.length;
+}

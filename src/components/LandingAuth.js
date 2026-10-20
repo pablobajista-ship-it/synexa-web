@@ -34,7 +34,7 @@ function GoogleButton({ googleEnabled }) {
         <GoogleIcon />
         Continuar con Google
       </button>
-      {!googleEnabled ? (
+      {!googleEnabled && process.env.NODE_ENV !== "production" ? (
         <p className="mt-3 text-[12px] text-[var(--color-gray-dark)] bg-[var(--color-surface-muted)] border border-dashed border-[var(--color-border)] rounded-lg px-3 py-2.5">
           El login con Google todavía no está configurado. Completá{" "}
           <code className="bg-white px-1 rounded">AUTH_GOOGLE_ID</code> y{" "}
