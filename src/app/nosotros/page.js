@@ -34,42 +34,53 @@ export default async function NosotrosPage() {
       <SiteHeader isAuthenticated={!!session?.user} dashboardHref={dashboardHref} portalEnabled={isPortalEnabled()} />
 
       <main>
-        {/* Hero institucional */}
-        <section className="relative overflow-hidden bg-[var(--color-navy)]">
+        {/* Hero institucional: misma composición que el Hero del Home */}
+        <section className="relative overflow-hidden bg-[var(--color-navy)] lg:min-h-[640px] xl:min-h-[700px] flex flex-col">
+          <div
+            className="absolute right-[-6%] top-1/2 -translate-y-1/2 hidden lg:block w-[62%] aspect-[3/2]"
+            style={{
+              WebkitMaskImage: "radial-gradient(ellipse 72% 72% at 55% 50%, #000 45%, transparent 100%)",
+              maskImage: "radial-gradient(ellipse 72% 72% at 55% 50%, #000 45%, transparent 100%)",
+            }}
+          >
+            <Image
+              src="/images/nosotros/nosotros-estudio.webp"
+              alt="Estudio de diseño con monitor y notebook mostrando interfaces web, tableta gráfica y paleta de colores"
+              fill
+              sizes="62vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div className="absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(90deg, #0b1f44 0%, rgba(11,31,68,0.85) 14%, rgba(11,31,68,0.4) 34%, rgba(11,31,68,0.05) 55%)" }} />
           <div className="pointer-events-none absolute inset-0 tech-grid opacity-60" />
           <div
             className="pointer-events-none absolute inset-0"
-            style={{ background: "radial-gradient(48% 60% at 8% 15%, rgba(37,99,235,0.3), transparent 70%), radial-gradient(40% 55% at 92% 90%, rgba(20,184,166,0.22), transparent 70%)" }}
+            style={{ background: "radial-gradient(45% 55% at 8% 20%, rgba(37,99,235,0.3), transparent 70%), radial-gradient(35% 45% at 70% 100%, rgba(20,184,166,0.22), transparent 70%)" }}
           />
-          <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 grid lg:grid-cols-[48%_52%] items-center gap-10 py-12 sm:py-16 lg:py-20">
-            <div className="max-w-[540px]">
-              <span className="hero-enter inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-[12.5px] font-semibold uppercase tracking-[0.16em] text-[var(--color-teal)] mb-6" style={{ "--d": "0ms" }}>
+          <div className="relative flex-1 w-full max-w-[1240px] mx-auto px-5 sm:px-8 flex items-center pt-14 pb-8 sm:pt-20 lg:py-20">
+            <div className="relative z-10 max-w-[620px]">
+              <span className="hero-enter inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.06] backdrop-blur px-4 py-1.5 text-[12.5px] font-semibold uppercase tracking-[0.16em] text-[var(--color-teal)] mb-7" style={{ "--d": "0ms" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-teal)] shadow-[0_0_10px_2px_rgba(20,184,166,0.7)]" />
                 Nosotros
               </span>
-              <h1 className="hero-enter text-[2.4rem] leading-[1.07] sm:text-[3.2rem] xl:text-[3.6rem] font-bold tracking-[-0.025em] text-white mb-5 text-balance" style={{ "--d": "90ms" }}>
+              <h1 className="hero-enter text-[2.9rem] leading-[1.04] sm:text-[4rem] xl:text-[4.5rem] font-bold tracking-[-0.03em] text-white mb-7 text-balance" style={{ "--d": "90ms" }}>
                 Tecnología que{" "}
                 <span className="bg-gradient-to-r from-[#5b93ff] to-[var(--color-teal)] bg-clip-text text-transparent">entiende tu negocio.</span>
               </h1>
-              <p className="hero-enter text-[17px] sm:text-[18px] text-white/75 leading-[1.65]" style={{ "--d": "180ms" }}>
+              <p className="hero-enter text-[17px] sm:text-[19px] text-white/75 leading-[1.65] max-w-[520px]" style={{ "--d": "180ms" }}>
                 En SYNEXA creemos que la tecnología debe ayudarte a crecer, simplificar tu trabajo y
                 conectar mejor con tus clientes.
               </p>
             </div>
-            <div className="hero-enter relative" style={{ "--d": "200ms" }}>
-              <div className="absolute -inset-4 rounded-[2rem] bg-[var(--color-blue)]/20 blur-3xl" />
-              <div className="relative aspect-[3/2] rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-2xl shadow-black/50">
-                <Image
-                  src="/images/nosotros/nosotros-hero.webp"
-                  alt="Pantallas y dispositivos mostrando interfaces web sobre un escritorio oscuro"
-                  fill
-                  sizes="(min-width: 1200px) 600px, (min-width: 1024px) 52vw, 92vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
+          </div>
+          {/* Imagen en móvil/tablet, bajo el texto */}
+          <div className="lg:hidden relative px-5 sm:px-8 pb-10">
+            <div className="relative aspect-[3/2] rounded-2xl overflow-hidden ring-1 ring-white/15 shadow-2xl shadow-black/50">
+              <Image src="/images/nosotros/nosotros-estudio.webp" alt="Estudio de diseño con monitor y notebook mostrando interfaces web, tableta gráfica y paleta de colores" fill sizes="92vw" className="object-cover" priority />
             </div>
           </div>
+          <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--color-teal)]/40 to-transparent" />
         </section>
 
         {/* Quiénes somos */}
