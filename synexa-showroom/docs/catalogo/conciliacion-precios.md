@@ -58,3 +58,6 @@ Para cambiar cualquiera: editar `precio` en `src/datos/catalogo.ts` y actualizar
 ## Cómo resolver
 
 Opción A: adoptar los 19 precios propuestos y actualizar el sitio principal. Opción B: mantener los precios vigentes en el Showroom (editar `precio` en `catalogo.ts`). Opción C: publicar los dos catálogos con roles distintos. Recomiendo A o B, para que haya un solo catálogo.
+
+## Decisión sobre los 5 pendientes (2026-10-19)
+Se publican con el precio propuesto del brief, con el prefijo «Desde» y «+ IVA»: Catálogo Avanzado 1.990.000, Portal Comercial Especializado 3.490.000, Radio Digital Esencial 790.000, Radio Digital Profesional 1.990.000 y Portal Multimedia Interactivo 3.490.000. Decisión de Pablo; no requiere cambios de código.
