@@ -5,7 +5,8 @@ import Hero from "@/components/marketing/Hero";
 import ServicesGrid from "@/components/marketing/ServicesGrid";
 import ValueProps from "@/components/marketing/ValueProps";
 import HomeAppsTeaser from "@/components/marketing/HomeAppsTeaser";
-import ProcessSteps from "@/components/marketing/ProcessSteps";
+import HomePricingTeaser from "@/components/marketing/HomePricingTeaser";
+import ProcessSteps from"@/components/marketing/ProcessSteps";
 import UseCasesGrid from "@/components/marketing/UseCasesGrid";
 import TechStack from "@/components/marketing/TechStack";
 import DarkBrandBlock from "@/components/marketing/DarkBrandBlock";
@@ -28,6 +29,7 @@ export default async function Home() {
         <ServicesGrid />
         <ValueProps />
         <HomeAppsTeaser />
+        <HomePricingTeaser />
         <ProcessSteps />
         <UseCasesGrid />
         <TechStack />

@@ -4,8 +4,14 @@
     {
       "name": "ticketera-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeArgs": ["run", "dev", "--", "-p", "3100"],
+      "port": 3100
+    },
+    {
+      "name": "showroom-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "synexa-showroom", "run", "preview", "--", "--port", "4173", "--strictPort"],
+      "port": 4173
     }
   ]
 }

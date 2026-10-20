@@ -9,3 +9,8 @@
   # secretos de Netlify la revisa y falla el build por AUTH_SECRET. Solo se
   # excluye esa carpeta; el resto del output se sigue escaneando.
   SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,.next/cache/**"
+
+# SYNEXA Showroom como /servicios-y-precios: definir la variable de entorno
+# SHOWROOM_URL (URL del sitio del Showroom en Netlify) y next.config.mjs
+# reenvía /servicios-y-precios, /demos y /assets. Sin la variable, el sitio
+# sigue sirviendo su propia página. Ver synexa-showroom/docs/arquitectura/.
