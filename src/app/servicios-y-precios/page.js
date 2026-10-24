@@ -20,6 +20,7 @@ import ExternalServicesBlock from "@/components/marketing/ExternalServicesBlock"
 import ManagedInfrastructure from "@/components/marketing/ManagedInfrastructure";
 import ThirdPartyCosts from "@/components/marketing/ThirdPartyCosts";
 import CustomProjectBlock from "@/components/marketing/CustomProjectBlock";
+import AfterDelivery from "@/components/marketing/AfterDelivery";
 import SupportPlans from "@/components/marketing/SupportPlans";
 import PaymentTerms from "@/components/marketing/PaymentTerms";
 import FaqSection from "@/components/marketing/FaqSection";
@@ -62,6 +63,7 @@ import {
 /** Navegación interna: la página es larga y mezcla tres áreas comerciales. */
 const SUB_NAV = [
   { id: "servicios", label: "Servicios y precios" },
+  { id: "despues-de-la-entrega", label: "Después de la entrega" },
   { id: "puesta-en-marcha", label: "Puesta en marcha" },
   { id: "tipos-de-costo", label: "Tipos de costo" },
   { id: "infraestructura", label: "Infraestructura" },
@@ -159,6 +161,9 @@ export default async function ServiciosYPreciosPage() {
 
         {/* ---------- Qué incluye + costos externos ---------- */}
         <ProjectIncludes items={PROJECT_INCLUDES} externalCostsNote={EXTERNAL_COSTS_NOTE} />
+
+        {/* ---------- Desarrollo vs. mantenimiento ---------- */}
+        <AfterDelivery />
 
         {/* ---------- Puesta en marcha ---------- */}
         <LaunchPeriod periods={getLaunchPeriods()} coverage={LAUNCH_COVERAGE} />

@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { href: "/#soluciones", label: "Soluciones" },
   { href: "/aplicaciones-para-negocios", label: "Aplicaciones" },
   { href: "/servicios-y-precios", label: "Servicios y Precios" },
+  { href: "/mantenimiento-web", label: "Mantenimiento Web" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
@@ -37,7 +38,7 @@ export default function SiteHeader({ isAuthenticated, dashboardHref, portalEnabl
             <Link
               key={link.href}
               href={link.href}
-              className="px-4 py-2 rounded-lg text-[15px] font-semibold text-[var(--color-gray-dark)] hover:text-[var(--color-navy)] hover:bg-[var(--color-surface-muted)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)]"
+              className="whitespace-nowrap px-3 xl:px-4 py-2 rounded-lg text-[15px] font-semibold text-[var(--color-gray-dark)] hover:text-[var(--color-navy)] hover:bg-[var(--color-surface-muted)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)]"
             >
               {link.label}
             </Link>

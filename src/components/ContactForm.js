@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { SERVICE_OPTIONS, LIMITS, validateInquiry } from "@/lib/contactOptions";
+import { SERVICE_OPTIONS, HELP_TYPE_OPTIONS, MAINTENANCE_SERVICES, LIMITS, validateInquiry } from "@/lib/contactOptions";
 
 const field =
   "w-full rounded-xl border border-[var(--color-border)] bg-white px-4 py-3 text-[15.5px] text-[var(--color-navy)] placeholder:text-[var(--color-gray-dark)]/50 transition-shadow focus:outline-none focus:border-[var(--color-blue)] focus:ring-4 focus:ring-[var(--color-blue)]/15 aria-[invalid=true]:border-red-400";
@@ -31,7 +31,7 @@ export default function ContactForm({ initialService = "", source = "" }) {
     startedAt.current = Date.now();
   }, []);
   const [values, setValues] = useState({
-    name: "", email: "", company: "", phone: "", service: initialService, message: "", consent: false,
+    name: "", email: "", company: "", phone: "", service: initialService, message: "", siteUrl: "", helpType: "", consent: false,
   });
   const [website, setWebsite] = useState(""); // honeypot
   const [errors, setErrors] = useState({});
@@ -128,6 +128,27 @@ export default function ContactForm({ initialService = "", source = "" }) {
           ))}
         </select>
       </Field>
+
+      {MAINTENANCE_SERVICES.includes(values.service) ? (
+        <div className="grid sm:grid-cols-2 gap-5 rounded-2xl border border-[var(--color-teal)]/30 bg-[var(--color-teal)]/[0.05] p-5">
+          <Field id="cf-siteUrl" text="Dirección del sitio web que necesitas mantener" optional error={errors.siteUrl}>
+            <input id="cf-siteUrl" type="text" inputMode="url" className={field} value={values.siteUrl} onChange={set("siteUrl")}
+              placeholder="www.minegocio.cl" maxLength={LIMITS.siteUrl} autoComplete="url"
+              aria-invalid={!!errors.siteUrl} aria-describedby={errors.siteUrl ? "cf-siteUrl-error" : undefined} />
+          </Field>
+          <Field id="cf-helpType" text="¿Qué tipo de ayuda necesitas?" optional>
+            <select id="cf-helpType" className={field} value={values.helpType} onChange={set("helpType")}>
+              <option value="">Selecciona una opción</option>
+              {HELP_TYPE_OPTIONS.map((o) => (
+                <option key={o.id} value={o.id}>{o.label}</option>
+              ))}
+            </select>
+          </Field>
+          <p className="sm:col-span-2 text-[13px] leading-[1.55] text-[var(--color-gray-dark)]">
+            El mantenimiento es un servicio opcional y se cotiza según las características de tu sitio.
+          </p>
+        </div>
+      ) : null}
 
       <Field id="cf-message" text="Cuéntanos tu idea" error={errors.message}>
         <textarea id="cf-message" rows={5} className={`${field} resize-y`} value={values.message} onChange={set("message")}

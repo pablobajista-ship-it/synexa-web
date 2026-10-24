@@ -43,4 +43,5 @@ export const HOME_STEPS = [
   { n: "01", title: "Explora", text: "Conoce las soluciones, revisa los precios y descubre los ejemplos." },
   { n: "02", title: "Conversemos", text: "Cuéntanos qué necesita tu negocio y recibe orientación sobre la alternativa más adecuada." },
   { n: "03", title: "Creamos", text: "Diseñamos, desarrollamos y publicamos la solución acordada." },
+  { n: "04", title: "Te acompañamos", optional: true, text: "Una vez entregado tu proyecto, puedes contratar mantenimiento y soporte técnico para facilitar su continuidad y evolución." },
 ];

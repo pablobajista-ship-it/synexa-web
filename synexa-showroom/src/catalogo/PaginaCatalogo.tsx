@@ -4,6 +4,7 @@ import { FAMILIAS, NECESIDADES, PAQUETES, lineaPorId } from "@/datos/catalogo";
 import type { NecesidadId } from "@/datos/tipos";
 import { TarjetaPaquete } from "./TarjetaPaquete";
 import { TresCostos } from "./TresCostos";
+import { Modalidades } from "./Modalidades";
 import { rutaAsset } from "@/utilidades/assets";
 
 const TODAS = "todas";
@@ -127,6 +128,7 @@ export function PaginaCatalogo() {
       </section>
 
       <TresCostos />
+      <Modalidades />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { IconArrowRight } from "@/components/marketing/icons";
 import {
@@ -81,8 +82,9 @@ export default function Hero() {
             className="hero-enter text-[17px] sm:text-[19px] text-white/75 leading-[1.65] mb-10 max-w-[540px]"
             style={{ "--d": "180ms" }}
           >
-            Diseñamos sitios web, tiendas online y sistemas personalizados. Conoce nuestros
-            ejemplos, revisa los precios y descubre qué podemos crear para ti.
+            Diseñamos, desarrollamos y publicamos sitios web, tiendas online y soluciones digitales
+            adaptadas a tu negocio. Además, ofrecemos servicios opcionales de mantenimiento y soporte
+            para acompañarte después de la entrega.
           </p>
           <div
             className="hero-enter flex flex-col sm:flex-row sm:flex-wrap gap-4"
@@ -96,6 +98,15 @@ export default function Hero() {
               Solicitar cotización
             </Button>
           </div>
+          <p className="hero-enter mt-6" style={{ "--d": "340ms" }}>
+            <Link
+              href="/mantenimiento-web"
+              className="group inline-flex items-center gap-1.5 text-[15px] font-semibold text-white/75 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-teal)] rounded"
+            >
+              Conoce nuestros servicios de mantenimiento
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none">→</span>
+            </Link>
+          </p>
         </div>
       </div>
 

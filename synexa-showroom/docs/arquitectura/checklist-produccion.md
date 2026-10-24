@@ -31,3 +31,15 @@ Guardar la respuesta (correo o captura) junto a `docs/imagenes/`. Si la respuest
 3. En `synexas` → Environment variables, editar `SHOWROOM_URL` y marcar **Production**.
 4. Verificar `https://synexas.netlify.app/servicios-y-precios` (Showroom), la home (teaser) y una demo.
 5. **Reversa:** quitar `SHOWROOM_URL` de Production y redesplegar; el sitio vuelve a su página antigua.
+
+## 6. Pendientes comerciales: mantenimiento web
+
+Decisiones que el equipo comercial debe tomar antes de publicar (los textos actuales evitan prometer lo no definido):
+
+- Confirmar que los planes SYNEXA Care / Care Plus / Business / Business Critical y el soporte por hora (ya publicados) siguen vigentes; la página `/mantenimiento-web` los reutiliza tal cual (`src/data/supportPlans.js`).
+- Los tres grupos de mantenimiento (básico, asistencia, avanzado) son orientativos, no planes contractuales; decidir si se formalizan.
+- Definir por escrito si hay garantía del trabajo entregado y su duración; hoy se dice solo que "no se asume incluida".
+- Definir políticas de hosting y dominio por propuesta (hoy: "se especifican por separado").
+- Condiciones para mantener sitios de otros proveedores (hoy: "podemos evaluar").
+- Revisar tiempos de respuesta y "monitoreo" de los planes existentes frente a lo que SYNEXA puede comprometer.
+- Los datos de mantenimiento del formulario (sitio, tipo de ayuda) se anexan al mensaje de la consulta; no hay columnas propias en la base.

@@ -13,6 +13,7 @@ export function Layout() {
           <a href="/" aria-label="SYNEXA, volver al inicio"><Logo oscuro /></a>
           <nav aria-label="Servicios y Precios" className="flex gap-1 overflow-x-auto text-sm font-medium">
             <a href="/" className="whitespace-nowrap rounded-md px-3 py-2 text-white/70 hover:text-white">← Inicio</a>
+            <a href="/mantenimiento-web" className="whitespace-nowrap rounded-md px-3 py-2 text-white/70 hover:text-white">Mantenimiento Web</a>
             {[["/servicios-y-precios", "Catálogo", true], ["/servicios-y-precios/comparar", "Comparar", false], ["/servicios-y-precios/arma-tu-solucion", "Arma tu solución", false], ["/servicios-y-precios/infraestructura-y-soporte", "Infraestructura y soporte", false], ["/servicios-y-precios/proyectos-realizados", "Proyectos realizados", false]].map(([to, t, end]) => (
               <NavLink key={to as string} to={to as string} end={end as boolean} className={({ isActive }) => `whitespace-nowrap rounded-md px-3 py-2 ${isActive ? "bg-white/15 text-white" : "text-white/70 hover:text-white"}`}>{t as string}</NavLink>
             ))}

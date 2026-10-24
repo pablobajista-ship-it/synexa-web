@@ -4,19 +4,39 @@
  * la URL o el formulario se acepta sin pasar por estas funciones.
  */
 export const SERVICE_OPTIONS = [
-  { id: "pagina-web", label: "Página web" },
-  { id: "catalogo", label: "Catálogo digital" },
-  { id: "tienda-online", label: "Tienda online" },
-  { id: "reservas", label: "Sistema de reservas" },
-  { id: "aplicacion", label: "Aplicación empresarial" },
-  { id: "portal-clientes", label: "Portal de clientes" },
-  { id: "personalizado", label: "Sistema personalizado" },
-  { id: "modernizar", label: "Modernizar mi sitio web" },
-  { id: "asesoria", label: "Necesito asesoría para decidir" },
+  { id: "pagina-web", label: "Crear una página web" },
+  { id: "tienda-online", label: "Crear una tienda online" },
+  { id: "catalogo", label: "Crear un catálogo digital" },
+  { id: "aplicacion", label: "Desarrollar un sistema o aplicación" },
+  { id: "mantenimiento", label: "Contratar mantenimiento web" },
+  { id: "soporte", label: "Solicitar soporte técnico" },
+  { id: "modernizar", label: "Mejorar un sitio web existente" },
+  { id: "asesoria", label: "Otro servicio / necesito orientación" },
 ];
 
+/** Ids anteriores: las consultas ya guardadas y los enlaces antiguos siguen siendo válidos. */
+const LEGACY_SERVICES = {
+  reservas: { label: "Sistema de reservas", maps: "aplicacion" },
+  "portal-clientes": { label: "Portal de clientes", maps: "aplicacion" },
+  personalizado: { label: "Sistema personalizado", maps: "aplicacion" },
+};
+
 export const SERVICE_IDS = SERVICE_OPTIONS.map((o) => o.id);
-export const serviceLabel = (id) => SERVICE_OPTIONS.find((o) => o.id === id)?.label ?? id;
+export const serviceLabel = (id) =>
+  SERVICE_OPTIONS.find((o) => o.id === id)?.label ?? LEGACY_SERVICES[id]?.label ?? id;
+
+/** Servicios que muestran los campos adicionales de mantenimiento. */
+export const MAINTENANCE_SERVICES = ["mantenimiento", "soporte"];
+
+export const HELP_TYPE_OPTIONS = [
+  { id: "actualizaciones", label: "Actualizaciones" },
+  { id: "revision", label: "Revisión técnica" },
+  { id: "correccion", label: "Corrección de problemas" },
+  { id: "respaldos", label: "Respaldos" },
+  { id: "modificaciones", label: "Modificaciones" },
+  { id: "no-seguro", label: "No estoy seguro" },
+];
+const HELP_TYPE_IDS = HELP_TYPE_OPTIONS.map((o) => o.id);
 
 export const INQUIRY_STATUS = {
   NUEVA: "Nueva",
@@ -25,7 +45,7 @@ export const INQUIRY_STATUS = {
   CERRADA: "Cerrada",
 };
 
-export const LIMITS = { name: 120, company: 120, phone: 30, message: 3000, email: 254 };
+export const LIMITS = { name: 120, company: 120, phone: 30, message: 3000, email: 254, siteUrl: 200 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 /** Chile (+56 9 1234 5678, 9 1234 5678) e internacionales (+34 ...). 7–15 dígitos. */
@@ -39,6 +59,7 @@ export function sanitizeOrigin(value) {
 
 export function sanitizeService(value) {
   const v = String(value ?? "").trim();
+  if (LEGACY_SERVICES[v]) return LEGACY_SERVICES[v].maps;
   return SERVICE_IDS.includes(v) ? v : "";
 }
 
@@ -52,6 +73,8 @@ export function validateInquiry(input) {
     phone: s(input.phone),
     service: sanitizeService(input.service),
     message: s(input.message),
+    siteUrl: s(input.siteUrl).replace(/\s+/g, ""),
+    helpType: HELP_TYPE_IDS.includes(s(input.helpType)) ? s(input.helpType) : "",
     source: sanitizeOrigin(input.source),
     consent: input.consent === true,
   };
@@ -77,7 +100,21 @@ export function validateInquiry(input) {
   if (values.message.length < 10) errors.message = "Cuéntanos un poco más sobre tu idea (mínimo 10 caracteres).";
   else if (values.message.length > LIMITS.message) errors.message = `Máximo ${LIMITS.message} caracteres.`;
 
+  if (values.siteUrl.length > LIMITS.siteUrl) errors.siteUrl = `Máximo ${LIMITS.siteUrl} caracteres.`;
+
   if (!values.consent) errors.consent = "Debes aceptar el tratamiento de tus datos para enviar la consulta.";
+
+  // Los datos de mantenimiento no tienen columna propia (no se altera la base):
+  // se anexan al mensaje para que lleguen completos al equipo.
+  if (!MAINTENANCE_SERVICES.includes(values.service)) {
+    values.siteUrl = "";
+    values.helpType = "";
+  } else {
+    const extra = [];
+    if (values.siteUrl) extra.push(`Sitio web a mantener: ${values.siteUrl}`);
+    if (values.helpType) extra.push(`Tipo de ayuda: ${HELP_TYPE_OPTIONS.find((o) => o.id === values.helpType).label}`);
+    if (extra.length) values.message = [values.message, extra.join("\n")].join("\n\n");
+  }
 
   return { values, errors };
 }
