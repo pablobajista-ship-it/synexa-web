@@ -3,6 +3,7 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/marketing/Reveal";
 import { IconCheck, IconClock, IconSettings } from "@/components/marketing/icons";
+import { MAINTENANCE_CONTACT } from "@/data/maintenance";
 import { resolvePricing } from "@/lib/pricing";
 
 /**
@@ -105,7 +106,7 @@ export default function SupportPlans({ plans, hourly }) {
 
                   <div className="mt-auto">
                     <Button
-                      href="/contacto"
+                      href={MAINTENANCE_CONTACT}
                       variant={plan.recommended ? "accent" : "secondary"}
                       size="md"
                       className="w-full"

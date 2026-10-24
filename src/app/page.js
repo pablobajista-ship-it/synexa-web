@@ -3,6 +3,7 @@ import { isPortalEnabled } from "@/lib/portal";
 import { CONTACT_PRIMARY } from "@/data/contact";
 import SiteHeader from "@/components/marketing/SiteHeader";
 import Hero from "@/components/marketing/Hero";
+import HomeTwoServices from "@/components/marketing/HomeTwoServices";
 import HomeSolutions from "@/components/marketing/HomeSolutions";
 import HomeDemos from "@/components/marketing/HomeDemos";
 import HomeWhy from "@/components/marketing/HomeWhy";
@@ -23,6 +24,7 @@ export default async function Home() {
       />
       <main>
         <Hero />
+        <HomeTwoServices />
         <HomeSolutions />
         <HomeDemos />
         <HomeWhy />

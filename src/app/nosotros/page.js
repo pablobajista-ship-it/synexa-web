@@ -22,7 +22,7 @@ export const metadata = {
 const PRINCIPLES = [
   { icon: "users", title: "Escuchamos", text: "Conocemos tu negocio y sus necesidades antes de proponer nada." },
   { icon: "layers", title: "Diseñamos", text: "Construimos soluciones con un propósito claro y fáciles de utilizar." },
-  { icon: "shield", title: "Acompañamos", text: "Te orientamos durante el desarrollo y ofrecemos servicios de continuidad, según lo contratado." },
+  { icon: "shield", title: "Acompañamos", text: "Nuestro trabajo no termina necesariamente cuando publicamos tu sitio. También ofrecemos servicios opcionales de mantenimiento, actualizaciones y soporte técnico, para quienes necesitan acompañamiento después de la entrega." },
 ];
 
 export default async function NosotrosPage() {
